@@ -55,6 +55,8 @@ public class telaGerenciarClientes extends javax.swing.JPanel {
      */
     public telaGerenciarClientes() {
         initComponents();
+        preencherTabela("select *from clientes order by nome");
+
     }
 
     /**
@@ -290,7 +292,6 @@ public class telaGerenciarClientes extends javax.swing.JPanel {
             mod.setCredito(Double.parseDouble(jTextFieldCredito.getText()));
             control.Salvar(mod);
             preencherTabela("select *from clientes order by nome");
-
             jTextFieldNome.setText("");
             jTextFieldId.setText("");
             jTextFieldCredito.setText("");

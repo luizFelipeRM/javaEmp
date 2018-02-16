@@ -10,7 +10,7 @@ package Pedidos;
  * @author luiz
  */
 public class beansPedido {
-    private double valorAtual;
+    private double valorCompra;
     private int desconto;
     private double saldo;
     private double saldoNovo;
@@ -22,17 +22,17 @@ public class beansPedido {
     private double preçoCompra;
 
     /**
-     * @return the valorAtual
+     * @return the valorCompra
      */
-    public double getValorAtual() {
-        return valorAtual;
+    public double getValorCompral() {
+        return valorCompra;
     }
 
     /**
-     * @param valorAtual the valorAtual to set
+     * @param valorCompra the valorCompra to set
      */
-    public void setValorAtual(double valorAtual) {
-        this.valorAtual = valorAtual;
+    public void setValorCompra(double valorCompra) {
+        this.valorCompra = valorCompra;
     }
 
     /**

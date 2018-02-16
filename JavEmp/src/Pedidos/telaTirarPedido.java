@@ -24,18 +24,22 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     beansProdutos modProdutos = new beansProdutos();
     daoProdutos controlProdutos = new daoProdutos();
     ConnectMYSQL conex = new ConnectMYSQL();
+    beansPedido mod = new beansPedido();
+    daoPedidos dao = new daoPedidos();
     DefaultListModel MODELO;
     int Enter = 0;
     
     
     //transformei as variaveis em arrays p criar 1 tabela e não só 1 coluna da tabela
     String idProduto;
-    String nomeProduto;
+    String nomeProduto = null;
     String tipoProduto;
     double valorProduto;
     int    estoqueProduto;
     int    quantidadeProduto = 1;
     carrinhoTableModel tableModel = new carrinhoTableModel();
+    
+    
     public telaTirarPedido() {
         initComponents();
         preencherTabelaProdutos("select *from produtos order by nome");
@@ -249,7 +253,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLayeredPane1.add(jLabel5);
         jLabel5.setBounds(560, 0, 75, 15);
 
-        jTextFieldValorAtual.setText("R$00,00");
+        jTextFieldValorAtual.setEditable(false);
+        jTextFieldValorAtual.setText("0.0");
+        jTextFieldValorAtual.setEnabled(false);
         jLayeredPane1.add(jTextFieldValorAtual);
         jTextFieldValorAtual.setBounds(560, 20, 110, 30);
 
@@ -302,7 +308,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLayeredPane1.add(jScrollPane3);
         jScrollPane3.setBounds(130, 50, 540, 83);
 
-        jLabelNomeCliente.setText("Nome do cliente");
+        jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
         jLabelNomeCliente.setBounds(280, 30, 170, 15);
 
@@ -364,6 +370,31 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
       }
          return valorTotal.toString();
     }
+    
+    private Integer CalcularQuantidadeTotal(){
+        int quantidadeTotal = 0;
+            for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
+                quantidadeTotal  += Integer.parseInt(jTable_Carrinho.getValueAt(i, 1).toString());
+            }
+            return quantidadeTotal;
+    }
+    
+    public void voltarPadrao(){
+        jLabelNomeCliente.setText("Nome do Cliente");
+        jTextFieldSaldo.setText("R$00,00");
+        jTextFieldValorAtual.setText("0.0");
+        jTextFieldPesquisarProduto.setText("");
+        jTextFieldNome.setText("");
+        jComboBoxTipodoProduto.setSelectedItem("Todos");
+        jFormattedTextFieldQuantidade.setText("Única");
+    }        
+    
+    public void limparTabela(){
+        for(double i = 0; i < jTable_Carrinho.getRowCount(); i =+ 0.5){
+            tableModel.removeRow(0);
+        }
+    }
+    
     private void jTableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosMouseClicked
         String nome =""+jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 1);
         conex.conectar();
@@ -439,8 +470,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if(nomeProduto != "" ){
-            if(jFormattedTextFieldQuantidade.getText().equals("1")){
+        if(nomeProduto != null ){
+            if(jFormattedTextFieldQuantidade.getText().equals("Única")){
                 quantidadeProduto = 1;  
                 preencherTabelaCarrinho();
             }else{
@@ -451,7 +482,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             jTextFieldValorAtual.setText(CalculaTotal());
             jTableProdutos.clearSelection();
             jTable_Carrinho.clearSelection();
-            jFormattedTextFieldQuantidade.setText("1");
+            jFormattedTextFieldQuantidade.setText("Única");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -461,8 +492,28 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         int resposta = 0;
         resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja Finalizar o pedido?");
         if(resposta ==JOptionPane.YES_OPTION){
-           jTextFieldValorAtual.setText(CalculaTotal());
-      }
+           
+         double valorAtual = Double.parseDouble(CalculaTotal());
+         
+            if(valorAtual != 0.0 ){
+                if(!jLabelNomeCliente.getText().equals("Nome do Cliente")){
+                    
+                    mod.setNomeClienteCompra(jLabelNomeCliente.getText());
+                    mod.setValorCompra(valorAtual);                                        
+                    mod.setQuantidadeCompra(CalcularQuantidadeTotal());
+                    dao.Salvar(mod);
+                    
+                    preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
+                    voltarPadrao();
+                    
+       
+       }else{
+                    JOptionPane.showMessageDialog(null, "Favor selecionar cliente antes de finalizar o pedido");
+                }
+      }else{
+                JOptionPane.showMessageDialog(null, "Favor adicionar um ou mais produtos à tabela antes de finalizar o pedido");
+            }
+     }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jFormattedTextFieldQuantidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQuantidadeMouseClicked
@@ -513,7 +564,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        tableModel.cleanRow();
+        limparTabela();        
+        jTextFieldValorAtual.setText("0.0");
+        
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed

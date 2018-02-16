@@ -58,18 +58,12 @@ public class carrinhoTableModel extends AbstractTableModel{
     
     public void removeRow(int linha){
         this.dados.remove(linha);
-        this.fireTableRowsDeleted(linha, linha);
+        this.fireTableDataChanged();
     }
-    
+    public void removeRows(int linha,int linha2){
+        this.dados.remove(linha);
+        this.fireTableRowsDeleted(linha, linha2);   
+    }
+  }
 
-    public void cleanRow() {
-        /*
-        while(tableModel.getRowCount() > 0) {
-            int linha = getRowCount();
-            this.dados.remove(linha);
-            this.fireTableRowsDeleted(linha, linha);
-        }
-        */
-    }
-}
 
