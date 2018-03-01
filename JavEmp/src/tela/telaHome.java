@@ -13,6 +13,7 @@ import Logando.telaLogin;
 import Logando.telaTrocaSenha;
 import Pedidos.telaTirarPedido;
 import Produtos.telaGerenciarProdutos;
+import estatisticas.telaEstatisticaPedidos;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.beans.PropertyVetoException;
@@ -31,7 +32,7 @@ public class telaHome extends javax.swing.JFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     public telaHome(String usuario) {
         initComponents();
-        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH); // iniciar com tela full
+     //   setExtendedState(java.awt.Frame.MAXIMIZED_BOTH); // iniciar com tela full
         conex.conectar();   
         
         jLabelUsuario.setText(usuario);
@@ -62,7 +63,6 @@ public class telaHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem10 = new javax.swing.JMenuItem();
         jLabelUsuario = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -84,16 +84,18 @@ public class telaHome extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItemEntradaESaída = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu_Minimizar = new javax.swing.JMenu();
         jMenu_Redimencionar = new javax.swing.JMenu();
         jMenu_Fechar = new javax.swing.JMenu();
 
-        jMenuItem10.setText("jMenuItem10");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(null);
 
         jLabelUsuario.setText("jLabelUsuario");
+        getContentPane().add(jLabelUsuario);
+        jLabelUsuario.setBounds(10, 550, 93, 15);
 
         jDesktopPane1.setLayer(jTabbedPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -101,12 +103,17 @@ public class telaHome extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jDesktopPane1);
+        jDesktopPane1.setBounds(0, 0, 1300, 550);
 
         jMenu1.setText("Arquivo");
 
@@ -205,6 +212,11 @@ public class telaHome extends javax.swing.JFrame {
         jMenuAdmin.add(jMenuItem7);
 
         jMenuItem9.setText("Estatísticas de Venda");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenuAdmin.add(jMenuItem9);
 
         jMenuItemEntradaESaída.setText("Entrada e Saída");
@@ -215,9 +227,15 @@ public class telaHome extends javax.swing.JFrame {
         });
         jMenuAdmin.add(jMenuItemEntradaESaída);
 
-        jMenuBar1.add(jMenuAdmin);
+        jMenuItem11.setText("Pedidos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenuAdmin.add(jMenuItem11);
 
-        jMenuBar1.add(Box.createHorizontalGlue()); // espaçamento pra mover os itens abaixo pra direita
+        jMenuBar1.add(jMenuAdmin);
 
         jMenu_Minimizar.setText("-");
         jMenu_Minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,26 +278,7 @@ public class telaHome extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelUsuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDesktopPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelUsuario)
-                .addContainerGap())
-        );
-
-        setSize(new java.awt.Dimension(441, 332));
+        setSize(new java.awt.Dimension(1302, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,7 +344,7 @@ public class telaHome extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
             telaTirarPedido gerenciarPedido = new telaTirarPedido();
-            gerenciarPedido.setMaximizable(true);
+//            gerenciarPedido.setMaximizable(true);
             gerenciarPedido.setVisible(true);
             jDesktopPane1.add(gerenciarPedido);
             jTabbedPane1.addTab("Tirar Pedido", gerenciarPedido);
@@ -353,7 +352,6 @@ public class telaHome extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         conex.desconecta();
-        dispose();
         telaTrocaSenha tsenha = new telaTrocaSenha();
         tsenha.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
@@ -415,6 +413,17 @@ public class telaHome extends javax.swing.JFrame {
         jTabbedPane1.addTab("Entrada e Saida", entradaSaida);
     }//GEN-LAST:event_jMenuItemEntradaESaídaActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        telaEstatisticaPedidos estatisticaPedido = new telaEstatisticaPedidos();
+        estatisticaPedido.setVisible(true);
+        jDesktopPane1.add(estatisticaPedido);
+        jTabbedPane1.addTab("Estatistica de Pedidos", estatisticaPedido);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -463,7 +472,7 @@ public class telaHome extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -20,12 +20,13 @@ public class beansPedido {
     private String tipoCompra;
     private int quantidadeCompra;
     private double preçoCompra;
+    private String data;
 
     /**
      * @return the valorCompra
      */
     public double getValorCompral() {
-        return valorCompra;
+        return getValorCompra();
     }
 
     /**
@@ -159,6 +160,27 @@ public class beansPedido {
      */
     public void setPreçoCompra(double preçoCompra) {
         this.preçoCompra = preçoCompra;
+    }
+
+    /**
+     * @return the valorCompra
+     */
+    public double getValorCompra() {
+        return valorCompra;
+    }
+
+    /**
+     * @return the data
+     */
+    public String getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(String data) {
+        this.data = data;
     }
     
     
