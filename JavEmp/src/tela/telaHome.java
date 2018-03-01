@@ -95,7 +95,7 @@ public class telaHome extends javax.swing.JFrame {
 
         jLabelUsuario.setText("jLabelUsuario");
         getContentPane().add(jLabelUsuario);
-        jLabelUsuario.setBounds(10, 550, 93, 15);
+        jLabelUsuario.setBounds(0, 760, 93, 15);
 
         jDesktopPane1.setLayer(jTabbedPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -108,12 +108,12 @@ public class telaHome extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         getContentPane().add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 1300, 550);
+        jDesktopPane1.setBounds(0, 0, 1300, 760);
 
         jMenu1.setText("Arquivo");
 
@@ -278,7 +278,7 @@ public class telaHome extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1302, 600));
+        setSize(new java.awt.Dimension(1302, 760));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

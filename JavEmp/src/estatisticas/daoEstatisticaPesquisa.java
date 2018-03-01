@@ -6,6 +6,8 @@
 package estatisticas;
 
 import DB.ConnectMYSQL;
+import Pedidos.beansPedido;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -37,5 +39,30 @@ public class daoEstatisticaPesquisa {
         }       
         conex.desconecta();       
         return mod;
-    }        
+    }  
+     
+     
+      public void Salvar(beansEstatisticaPedidos mod) {
+        conex.conectar();
+        try {
+            PreparedStatement pst = conex.con.prepareStatement("insert into compraFeita(clienteCompraFeita, nomeCompraFeita,valorCompraFeita,quantidadeCompraFeita,mesCompraFeita) values(?,?,?,?,?)");
+            pst.setString(1, mod.getNomeCliente());
+            pst.setString(2, mod.getNome());
+            pst.setDouble(3, mod.getValor());
+            pst.setInt(4, mod.getQuantidade());
+            pst.setString(5, mod.getData());
+            
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir dados /n"+ex);
+        }
+        conex.desconecta();
+    }
+     
+     
+     
+     
+     
+     
 }

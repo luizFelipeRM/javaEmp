@@ -17,6 +17,7 @@ public class beansEstatisticaPedidos {
     private double valor;
     private int quantidade;
     private String data;
+    private String nomeCliente;
 
     
     
@@ -117,6 +118,20 @@ public class beansEstatisticaPedidos {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the nomeCliente
+     */
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    /**
+     * @param nomeCliente the nomeCliente to set
+     */
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
     
 }

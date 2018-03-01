@@ -9,6 +9,8 @@ import DB.ConnectMYSQL;
 import Funcionarios.modeloTabela;
 import Produtos.beansProdutos;
 import Produtos.daoProdutos;
+import estatisticas.beansEstatisticaPedidos;
+import estatisticas.daoEstatisticaPesquisa;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -30,6 +32,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     beansPedido mod = new beansPedido();
     daoPedidos dao = new daoPedidos();
+    beansEstatisticaPedidos beans = new beansEstatisticaPedidos();
+    daoEstatisticaPesquisa daoEstatistica = new daoEstatisticaPesquisa();
     DefaultListModel MODELO;
     int Enter = 0;
     
@@ -181,7 +185,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jList);
 
         jLayeredPane1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 50, 250, 140);
+        jScrollPane1.setBounds(10, 50, 250, 140);
 
         jButtonRemover.setText("Remover");
         jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +286,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
         jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
-        jLabelNomeCliente.setBounds(280, 30, 170, 15);
+        jLabelNomeCliente.setBounds(280, 30, 120, 20);
 
         jButton2.setText("Adicionar ao Carrinho");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -329,7 +333,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     public String getDataAtual() {
 		Calendar calendar = new GregorianCalendar();
                 Date data = new Date(System.currentTimeMillis());  
-                SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
+                //SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
+                SimpleDateFormat formatarDate = new SimpleDateFormat("MM/yyyy"); 
+
 		return formatarDate.format(data);               
 	}
 
@@ -394,6 +400,20 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 quantidadeTotal  += Integer.parseInt(jTable_Carrinho.getValueAt(i, 1).toString());
             }
             return quantidadeTotal;
+    }
+    
+    
+    private void Salvar(){
+         for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
+           beans.setNomeCliente(jLabelNomeCliente.getText());
+           beans.setNome((String) jTable_Carrinho.getValueAt(i, 0));
+           beans.setQuantidade((int) jTable_Carrinho.getValueAt(i, 1));
+           beans.setValor((double) jTable_Carrinho.getValueAt(i, 2));
+           beans.setData(getDataAtual());
+           
+           daoEstatistica.Salvar(beans);
+      }
+        
     }
     
     public void voltarPadrao(){
@@ -505,6 +525,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                     mod.setQuantidadeCompra(CalcularQuantidadeTotal());
                     mod.setData(getDataAtual());
                     dao.Salvar(mod);
+                    
+                    Salvar();
                     
                     jComboBoxTipodoProduto.setSelectedItem("Todos");
                     preencherTabelaProdutos("select *from produtos order by nome");
