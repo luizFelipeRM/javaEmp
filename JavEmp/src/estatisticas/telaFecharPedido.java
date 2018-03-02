@@ -16,7 +16,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author luiz
  */
-public class telaEstatisticaPedidos extends javax.swing.JInternalFrame {
+public class telaFecharPedido extends javax.swing.JInternalFrame {
 
     ConnectMYSQL conex = new ConnectMYSQL();
     beansEstatisticaPedidos mod = new beansEstatisticaPedidos();
@@ -24,7 +24,7 @@ public class telaEstatisticaPedidos extends javax.swing.JInternalFrame {
     
     
     
-    public telaEstatisticaPedidos() {
+    public telaFecharPedido() {
         initComponents();
         preencherTabelaPedidos("select *from compra order by data");
     }

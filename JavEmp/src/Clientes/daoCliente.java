@@ -78,7 +78,7 @@ public class daoCliente {
         conex.conectar(); 
         try {  
             // preencherTabela("select *from funcionarios order by usuario");
-            conex.executaSql("select *from clientes where nome like'%");
+            conex.executaSql("select *from clientes where nome like'%" + mod.getPesquisa()+"%'");
             conex.rs.first();
             mod.setId(conex.rs.getInt("id"));
             mod.setNome(conex.rs.getString("nome"));

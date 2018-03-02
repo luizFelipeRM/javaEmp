@@ -77,6 +77,22 @@ public class daoProdutos {
         
     }
     
+    public void editarQuantidade(beansProdutos mod){
+        conex.conectar();
+        try {
+            PreparedStatement pst = conex.con.prepareStatement("update produtos set estoque=? where id=?"); //alteração
+            pst.setInt      (1, mod.getEstoque());
+            pst.setInt      (2, mod.getId());
+            
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Dados alterados com sucessos");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na alteração dos dados /nErro:"+ex );
+        }
+        
+        
+    }
+    
     public beansProdutos buscar(beansProdutos mod){
         conex.conectar(); 
         try {  
@@ -90,7 +106,7 @@ public class daoProdutos {
             mod.setEstoque(conex.rs.getInt("estoque")); 
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar usuario /nErro"+ex);
+            
         }       
         conex.desconecta();       
         return mod;

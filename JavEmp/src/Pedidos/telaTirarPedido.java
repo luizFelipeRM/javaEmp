@@ -136,6 +136,11 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jTextFieldPesquisarProduto.setBounds(14, 38, 521, 19);
 
         jComboBoxTipodoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
+        jComboBoxTipodoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipodoProdutoActionPerformed(evt);
+            }
+        });
         jPanel2.add(jComboBoxTipodoProduto);
         jComboBoxTipodoProduto.setBounds(541, 35, 105, 24);
 
@@ -385,6 +390,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         }
         conex.desconecta();
     }    
+    
+    
     
     private String CalculaTotal(){
         Double valorTotal = 0.0;
@@ -698,6 +705,10 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             jTextFieldQuantidade.setText("");
         }
     }//GEN-LAST:event_jTextFieldQuantidadeKeyPressed
+
+    private void jComboBoxTipodoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipodoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipodoProdutoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

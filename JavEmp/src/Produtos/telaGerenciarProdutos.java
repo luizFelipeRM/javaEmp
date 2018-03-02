@@ -153,6 +153,11 @@ public class telaGerenciarProdutos extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,7 +257,7 @@ public class telaGerenciarProdutos extends javax.swing.JInternalFrame {
         if(resposta ==JOptionPane.YES_OPTION){
             mod.setId(Integer.parseInt(jTextFieldId.getText()));
             control.excluir(mod);
-            preencherTabela("select *from produtos order by tipo");
+            preencherTabela("select *from produtos order by nome");
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
@@ -320,9 +325,12 @@ public class telaGerenciarProdutos extends javax.swing.JInternalFrame {
             mod.setId(Integer.parseInt(jTextFieldId.getText()));
             control.editar(mod);
             preencherTabela("select *from produtos order by nome");
-
         }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
           String [] colunas = new String []{"ID","Nome","Tipo","Valor","Estoque"};

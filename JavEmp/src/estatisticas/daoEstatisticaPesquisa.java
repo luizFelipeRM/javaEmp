@@ -6,7 +6,6 @@
 package estatisticas;
 
 import DB.ConnectMYSQL;
-import Pedidos.beansPedido;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -59,10 +58,6 @@ public class daoEstatisticaPesquisa {
         }
         conex.desconecta();
     }
-     
-     
-     
-     
      
      
 }
