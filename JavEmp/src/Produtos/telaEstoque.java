@@ -49,7 +49,7 @@ public class telaEstoque extends javax.swing.JInternalFrame{
                       preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
                       
         }
-                    Thread.sleep(30000);
+                    Thread.sleep(15000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
       }

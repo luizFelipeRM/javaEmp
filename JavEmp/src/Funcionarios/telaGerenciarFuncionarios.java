@@ -32,18 +32,21 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                          mod.setPesquisa(jTextFieldPesquisar.getText());
                          mod.setTipoPesquisa((String) jComboBox1.getSelectedItem());
                          control.buscar(mod);
+                         if(jTextFieldPesquisar.getText().equals("")){
+                             preencherTabela("select *from funcionarios order by usuario");
+                         }else{
+                         
                         preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'"+"and cargo like'"+mod.getTipoPesquisa()+"'"); 
-   
-                    Thread.sleep(6500);
+                         }
+                         
+                         
+                         
+                    Thread.sleep(15000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
       }
     }
   }
-    
-    
-    
-    
     
     
     public telaGerenciarFuncionarios() {

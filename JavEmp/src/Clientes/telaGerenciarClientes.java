@@ -26,9 +26,38 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
     int flag =1;
     
     
+    public void atualizarTabela() {
+             while (true) {
+                try {
+                         mod.setPesquisa(jTextFieldPesquisar.getText());
+                         control.buscar(mod);
+                         if(jTextFieldPesquisar.getText().equals("")){
+                             preencherTabela("select *from clientes order by nome");
+                         }else{
+                             mod.setPesquisa(jTextFieldPesquisar.getText());
+                             control.buscar(mod);
+                             preencherTabela("select *from clientes where nome like '%" + mod.getPesquisa()+ "%'");
+                         }
+                         
+                         
+                         
+                    Thread.sleep(15000);
+             } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+    }
+  }
+    
+    
+    
     public telaGerenciarClientes() {
         initComponents();
-        preencherTabela("select *from clientes order by nome");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            atualizarTabela();
+            }
+        }).start(); 
     }
 
     
@@ -269,11 +298,28 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
             jComboBoxBairros.setSelectedItem(conex.rs.getString("bairro"));
             jTextFieldComplemento.setText(conex.rs.getString("complemento"));
             jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
+            
+             if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   /    -  ") ){
+            jComboBox1.setSelectedItem("CPF");
+            jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
+        }
+             else if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   -  ") ){
+            jComboBox1.setSelectedItem("CNPJ");
+            jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
+        }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar os dados "+ex);
         }
-
+        
+        if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   /    -  ") ){
+            jComboBox1.setSelectedItem("CNPJ");
+        }
+        if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   -  ") && jComboBox1.getSelectedItem().equals("CPF")){
+            jComboBox1.setSelectedItem("CPF");
+        }
+        
         conex.desconecta();
     }//GEN-LAST:event_jTableClienteMouseClicked
 
@@ -298,6 +344,15 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         flag =1;
         limpareLiberar();
+        
+        jTextFieldNome.setText("Nome do Cliente");
+        jTextFieldId.setText("");
+        jTextFieldRua.setText("Rua do Cliente");
+        jComboBox1.setSelectedItem("CPF");
+        jFormattedTextFieldCPFCNPJ.setText("");
+        jComboBoxBairros.setSelectedItem("Abolição");
+        jTextFieldComplemento.setText("Numeros e Complementos");
+        
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
@@ -390,7 +445,6 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         
         
         jTextFieldNome.setEnabled(true);
-        jTextFieldId.setEnabled(true);
         jTextFieldRua.setEnabled(true);;
         jComboBox1.setEnabled(true);
         jFormattedTextFieldCPFCNPJ.setEnabled(true);
@@ -409,8 +463,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         jTextFieldComplemento.setText("Numeros e Complementos");
         
         jTextFieldNome.setEnabled(false);
-        jTextFieldId.setEnabled(false);
-        jTextFieldRua.setEnabled(false);;
+        jTextFieldRua.setEnabled(false);
         jComboBox1.setEnabled(false);
         jFormattedTextFieldCPFCNPJ.setEnabled(false);
         jComboBoxBairros.setEnabled(false);
