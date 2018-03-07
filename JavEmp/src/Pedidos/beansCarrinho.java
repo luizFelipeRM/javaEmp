@@ -5,6 +5,7 @@ public class beansCarrinho {
     private int qtd;
     private double valor;
     private int id;
+    private String marca;
 
     public String getDescricao() {
         return descricao;
@@ -42,5 +43,19 @@ public class beansCarrinho {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estatisticas;
+package Pedidos;
 
 import DB.ConnectMYSQL;
 import Funcionarios.modeloTabela;
@@ -19,14 +19,38 @@ import javax.swing.ListSelectionModel;
 public class telaFecharPedido extends javax.swing.JInternalFrame {
 
     ConnectMYSQL conex = new ConnectMYSQL();
-    beansEstatisticaPedidos mod = new beansEstatisticaPedidos();
-    daoEstatisticaPesquisa control = new daoEstatisticaPesquisa();
+    beansPedido mod = new beansPedido();
+    daoPedidos control = new daoPedidos();
     
     
-    
+    public void atualizarTabela() {
+             while (true) {                 
+                try {
+
+                        if(jTextFieldPesquisar.getText().equals("")){
+                    preencherTabelaPedidos("select *from compra order by data");
+                    
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisar.getText());
+                            control.Buscar(mod);
+                            preencherTabelaPedidos("select *from compra where nome like'%" + mod.getPesquisa()+ "%'");
+                      }                                                           
+        
+            Thread.sleep(15000);
+             } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+    }
+  }
+ 
     public telaFecharPedido() {
         initComponents();
-        preencherTabelaPedidos("select *from compra order by data");
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+            atualizarTabela();
+            }
+        }).start();  
     }
 
     /**
@@ -41,6 +65,8 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePedidos = new javax.swing.JTable();
         jTextFieldPesquisar = new javax.swing.JTextField();
+        jButtonPesquisar = new javax.swing.JButton();
+        jButtonEnviarPedido = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -63,6 +89,17 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonPesquisar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+
+        jButtonEnviarPedido.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jButtonEnviarPedido.setText("Enviar Pedido");
+        jButtonEnviarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnviarPedidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,18 +107,25 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
-                    .addComponent(jTextFieldPesquisar))
+                    .addComponent(jButtonEnviarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 1109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldPesquisar)
+                    .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEnviarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -90,9 +134,20 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
     private void jTextFieldPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarActionPerformed
         // TODO add your handling code here:
         mod.setPesquisa(jTextFieldPesquisar.getText());
-        control.buscar(mod);
+        control.Buscar(mod);
         preencherTabelaPedidos("select *from compra where nome like'%" + mod.getPesquisa()+ "%'");
     }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
+
+    private void jButtonEnviarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarPedidoActionPerformed
+        // TODO add your handling code here:
+        int resposta = 0;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja Enviar o Pedido?");
+            if(resposta ==JOptionPane.YES_OPTION){    
+                mod.setIdCompra((int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0));
+                control.Excluir(mod);
+                preencherTabelaPedidos("select *from compra order by data");
+      }
+    }//GEN-LAST:event_jButtonEnviarPedidoActionPerformed
 
     public void preencherTabelaPedidos(String Sql){
           ArrayList dados = new ArrayList();
@@ -105,24 +160,25 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
                   dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("valor"),conex.rs.getDouble("quantidade"),conex.rs.getString("data")});
               }while(conex.rs.next());
           }catch(SQLException ex){
-              JOptionPane.showMessageDialog(null, "Erro ao preencher Arraylist"+ex); 
+              
+                      
           }
           modeloTabela modelo = new modeloTabela(dados, colunas);
           
           jTablePedidos.setModel(modelo);
-          jTablePedidos.getColumnModel().getColumn(0).setPreferredWidth(43);
+          jTablePedidos.getColumnModel().getColumn(0).setPreferredWidth(70);
           jTablePedidos.getColumnModel().getColumn(0).setResizable(false);
           
-          jTablePedidos.getColumnModel().getColumn(1).setPreferredWidth(121);
+          jTablePedidos.getColumnModel().getColumn(1).setPreferredWidth(315);
           jTablePedidos.getColumnModel().getColumn(1).setResizable(false);
           
-          jTablePedidos.getColumnModel().getColumn(2).setPreferredWidth(90);
+          jTablePedidos.getColumnModel().getColumn(2).setPreferredWidth(315);
           jTablePedidos.getColumnModel().getColumn(2).setResizable(false);
           
-          jTablePedidos.getColumnModel().getColumn(3).setPreferredWidth(85);
+          jTablePedidos.getColumnModel().getColumn(3).setPreferredWidth(315);
           jTablePedidos.getColumnModel().getColumn(3).setResizable(false);
           
-          jTablePedidos.getColumnModel().getColumn(4).setPreferredWidth(85);
+          jTablePedidos.getColumnModel().getColumn(4).setPreferredWidth(315);
           jTablePedidos.getColumnModel().getColumn(4).setResizable(false);
 
           jTablePedidos.getTableHeader().setReorderingAllowed(false);
@@ -133,6 +189,8 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonEnviarPedido;
+    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePedidos;
     private javax.swing.JTextField jTextFieldPesquisar;

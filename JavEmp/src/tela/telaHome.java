@@ -5,7 +5,6 @@
  */
 package tela;
 
-import Atualizador.atualizarTabelas;
 import Clientes.telaGerenciarClientes;
 import Funcionarios.telaGerenciarFuncionarios;
 import DB.ConnectMYSQL;
@@ -14,8 +13,8 @@ import Logando.telaLogin;
 import Logando.telaTrocaSenha;
 import Pedidos.telaTirarPedido;
 import Produtos.telaEstoque;
-import Produtos.telaGerenciarProdutos;
-import estatisticas.telaFecharPedido;
+import Produtos.telaGenrenciarProdutos;
+import Pedidos.telaFecharPedido;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.beans.PropertyVetoException;
@@ -72,17 +71,12 @@ public class telaHome extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItemControleDeMaterial = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItem_CriarUsuario = new javax.swing.JMenuItem();
         jMenuItemGerenciarProdutos = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItemEntradaESaída = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -165,15 +159,6 @@ public class telaHome extends javax.swing.JFrame {
         jMenu2.setText("Sistema");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem2.setText("Entrade e saída");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
         jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem1.setText("Estoque");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -192,24 +177,7 @@ public class telaHome extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem8.setText("Alocação");
-        jMenu2.add(jMenuItem8);
-
-        jMenuItemControleDeMaterial.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItemControleDeMaterial.setText("Controle de Material");
-        jMenuItemControleDeMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemControleDeMaterialActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemControleDeMaterial);
-
         jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Janelas");
-        jMenu3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuBar1.add(jMenu3);
 
         jMenuAdmin.setText("Admin");
         jMenuAdmin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -240,15 +208,6 @@ public class telaHome extends javax.swing.JFrame {
             }
         });
         jMenuAdmin.add(jMenuItem5);
-
-        jMenuItem7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem7.setText("Logs Movimentação");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenuAdmin.add(jMenuItem7);
 
         jMenuItem11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem11.setText("Pedidos");
@@ -354,10 +313,6 @@ public class telaHome extends javax.swing.JFrame {
         conex.desconecta();          
     }//GEN-LAST:event_jMenuItem_CriarUsuarioActionPerformed
 
-    private void jMenuItemControleDeMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemControleDeMaterialActionPerformed
-   
-    }//GEN-LAST:event_jMenuItemControleDeMaterialActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
             telaEstoque estoque = new telaEstoque();
@@ -377,7 +332,7 @@ public class telaHome extends javax.swing.JFrame {
             conex.executaSql("select *from funcionarios where usuario ='"+jLabelUsuario.getText()+"'");
             conex.rs.first();
             if(conex.rs.getString("cargo").equals("Administrador")){
-                telaGerenciarProdutos gerenciarProdutos = new telaGerenciarProdutos();
+                telaGenrenciarProdutos gerenciarProdutos = new telaGenrenciarProdutos();
                 
                 
                gerenciarProdutos.setVisible(true);
@@ -385,7 +340,7 @@ public class telaHome extends javax.swing.JFrame {
                jTabbedPane1.addTab("Gerenciar Produtos", gerenciarProdutos);
                
             }else{
-                JOptionPane.showMessageDialog(null, "Você nãinitComponents();o tem autorização para esta função");
+                JOptionPane.showMessageDialog(null, "Você não tem autorização para esta função");
             }                
 
         } catch (SQLException ex) {
@@ -422,13 +377,6 @@ public class telaHome extends javax.swing.JFrame {
         tlogin.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        telaEntradaSaida tentradasaida = new telaEntradaSaida();
-        tentradasaida.setVisible(true);
-        jDesktopPane1.add(tentradasaida);
-        jTabbedPane1.addTab("Entrada e Saída", tentradasaida);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenu_FecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_FecharActionPerformed
     }//GEN-LAST:event_jMenu_FecharActionPerformed
 
@@ -454,10 +402,6 @@ public class telaHome extends javax.swing.JFrame {
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jMenu_MinimizarMouseClicked
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
     private void jMenuItemEntradaESaídaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEntradaESaídaActionPerformed
         telaEntradaSaida entradaSaida = new telaEntradaSaida();
         entradaSaida.setVisible(true);
@@ -477,28 +421,22 @@ public class telaHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:
-        atualizarTabelas atualizar = new atualizarTabelas();
-        atualizar.atualizar();
+
         
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jTabbedPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MousePressed
-        // TODO add your handling code here:
-        atualizarTabelas atualizar = new atualizarTabelas();
-        atualizar.atualizar();
+
+
     }//GEN-LAST:event_jTabbedPane1MousePressed
 
     private void jTabbedPane1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseReleased
-        // TODO add your handling code here:
-        atualizarTabelas atualizar = new atualizarTabelas();
-        atualizar.atualizar();
+  
+
     }//GEN-LAST:event_jTabbedPane1MouseReleased
 
     private void jDesktopPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane1MouseClicked
-        // TODO add your handling code here:
-        atualizarTabelas atualizar = new atualizarTabelas();
-        atualizar.atualizar();
+ 
     }//GEN-LAST:event_jDesktopPane1MouseClicked
 
     /**
@@ -545,20 +483,15 @@ public class telaHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JMenuItem jMenuItemControleDeMaterial;
     private javax.swing.JMenuItem jMenuItemEntradaESaída;
     private javax.swing.JMenuItem jMenuItemGerenciarProdutos;
     private javax.swing.JMenuItem jMenuItem_CriarUsuario;

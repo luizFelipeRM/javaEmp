@@ -21,6 +21,9 @@ public class beansPedido {
     private int quantidadeCompra;
     private double preçoCompra;
     private String data;
+    private String pesquisa;
+    private String tipoPesquisa;
+    private String marca;
 
     /**
      * @return the valorCompra
@@ -181,6 +184,48 @@ public class beansPedido {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the pesquisa
+     */
+    public String getPesquisa() {
+        return pesquisa;
+    }
+
+    /**
+     * @param pesquisa the pesquisa to set
+     */
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
+
+    /**
+     * @return the tipoPesquisa
+     */
+    public String getTipoPesquisa() {
+        return tipoPesquisa;
+    }
+
+    /**
+     * @param tipoPesquisa the tipoPesquisa to set
+     */
+    public void setTipoPesquisa(String tipoPesquisa) {
+        this.tipoPesquisa = tipoPesquisa;
+    }
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
     
     

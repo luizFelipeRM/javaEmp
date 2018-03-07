@@ -18,6 +18,7 @@ public class beansEstatisticaPedidos {
     private int quantidade;
     private String data;
     private String nomeCliente;
+    private String marca;
 
     
     
@@ -132,6 +133,20 @@ public class beansEstatisticaPedidos {
      */
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
     
 }

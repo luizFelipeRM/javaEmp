@@ -49,6 +49,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
 
         jLabel1.setText("IMG SENHA");
 
+        jTextField_Usuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextField_Usuario.setText("usuário");
         jTextField_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -61,6 +62,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
             }
         });
 
+        jTextField_PassAntiga.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextField_PassAntiga.setText("senha antiga");
         jTextField_PassAntiga.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -68,6 +70,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
             }
         });
 
+        jTextField_PassNova.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextField_PassNova.setText("nova senha");
         jTextField_PassNova.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -75,6 +78,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
             }
         });
 
+        jButton_Confirmar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton_Confirmar.setText("Confirmar");
         jButton_Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +86,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
             }
         });
 
+        jButton_Cancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton_Cancelar.setText("Cancelar");
         jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +94,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
             }
         });
 
+        jTextField_ConfirmarPassNova.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextField_ConfirmarPassNova.setText("confirmar nova senha");
         jTextField_ConfirmarPassNova.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,7 +121,7 @@ public class telaTrocaSenha extends javax.swing.JFrame {
                             .addComponent(jButton_Confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +144,8 @@ public class telaTrocaSenha extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(373, 179));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_UsuarioMouseClicked

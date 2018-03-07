@@ -26,25 +26,48 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     int flag;
     
+    public void atualizarTabela() {
+             while (true) {
+                try {
+                         mod.setPesquisa(jTextFieldPesquisar.getText());
+                         mod.setTipoPesquisa((String) jComboBox1.getSelectedItem());
+                         control.buscar(mod);
+                        preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'"+"and cargo like'"+mod.getTipoPesquisa()+"'"); 
+   
+                    Thread.sleep(6500);
+             } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+    }
+  }
+    
+    
+    
+    
+    
+    
     public telaGerenciarFuncionarios() {
         initComponents();
-        preencherTabela("select *from funcionarios order by usuario");  
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            atualizarTabela();
+            }
+        }).start();    
+        
     }
     
     public void habilitarBotoes(){
-        jButtonNovo.setEnabled(false);
+        jButtonDeletar.setEnabled(false);
         jButtonSalvar.setEnabled(true);
-        jButtonCancelar.setEnabled(true);
         jButtonEditar.setEnabled(false);
-        jButtonExcluir.setEnabled(false);
+        
     }
     public void desabilitarBotoes(){
-        jButtonNovo.setEnabled(true);
+        jButtonDeletar.setEnabled(true);
         jButtonEditar.setEnabled(true);
         jButtonSalvar.setEnabled(false);
-        jButtonCancelar.setEnabled(false);
         jButtonEditar.setEnabled(false);
-        jButtonExcluir.setEnabled(false);
     }
     public void liberarCampos(){
         jTextFieldNome.setEnabled(true);
@@ -52,14 +75,24 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         jTextFieldSenha2.setEnabled(true);
         jComboBox.setEnabled(true);
         jTextField_NomeCompleto.setEnabled(true);
-        jTextField_Ramal.setEnabled(true);
-    }
-    public void infoCampos(){
+        jFormattedTextFieldTelefone.setEnabled(true);
+        jTextFieldEmail.setEnabled(true);
+        jTextFieldRua.setEnabled(true);
+        jComboBoxBairros.setEnabled(true);
+        jFormattedTextFieldCPF.setEnabled(true);
+        
         jTextFieldNome.setText("Usuário");
+        jFormattedTextFieldTelefone.setText("");
+        jTextField_NomeCompleto.setText("Nome Completo");
+        jComboBox.setSelectedItem("Administrador");
         jTextFieldSenha.setText("Senha");
         jTextFieldSenha2.setText("Confirmar Senha");
-        jTextField_NomeCompleto.setText("Nome Completo");
-        jTextField_Ramal.setText("Ramal");
+        jTextFieldEmail.setText("Email");
+        jTextFieldRua.setText("Rua do Funcionário");
+        jComboBox.setSelectedItem("Abolição");
+        jFormattedTextFieldCPF.setText("");
+        
+        
     }
     public void bloquearCampos(){
         jTextFieldNome.setEnabled(false);
@@ -67,16 +100,25 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         jTextFieldSenha2.setEnabled(false);
         jComboBox.setEnabled(false);
         jTextField_NomeCompleto.setEnabled(false);
-        jTextField_Ramal.setEnabled(false);
+        jFormattedTextFieldTelefone.setEnabled(false);
+        jTextFieldEmail.setEnabled(false);
+        jTextFieldRua.setEnabled(false);
+        jComboBoxBairros.setEnabled(false);
+        jFormattedTextFieldCPF.setEnabled(false);
+        
+        jTextFieldNome.setText("Usuário");
+        jFormattedTextFieldTelefone.setText("");
+        jTextField_NomeCompleto.setText("Nome Completo");
+        jComboBox.setSelectedItem("Administrador");
+        jTextFieldSenha.setText("Senha");
+        jTextFieldSenha2.setText("Confirmar Senha");
+        jTextFieldEmail.setText("Email");
+        jTextFieldRua.setText("Rua do Funcionário");
+        jComboBox.setSelectedItem("Abolição");
+        jFormattedTextFieldCPF.setText("");
+        
     }
-    public void limparCampos(){
-        jTextFieldId.setText("");
-        jTextFieldNome.setText("");
-        jTextFieldSenha.setText("");
-        jTextFieldSenha2.setText("");  
-        jTextField_NomeCompleto.setText("");
-        jTextField_Ramal.setText("");  
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,35 +135,43 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         jTextFieldSenha = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldSenha2 = new javax.swing.JTextField();
-        jButtonPesquisar = new javax.swing.JButton();
         jTextFieldPesquisar = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
-        jButtonNovo = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
+        jButtonDeletar = new javax.swing.JButton();
         jTextFieldId = new javax.swing.JTextField();
         jButtonEditar = new javax.swing.JButton();
         jTextField_NomeCompleto = new javax.swing.JTextField();
-        jTextField_Ramal = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonNovo = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jTextFieldRua = new javax.swing.JTextField();
+        jComboBoxBairros = new javax.swing.JComboBox<>();
+        jFormattedTextFieldTelefone = new javax.swing.JFormattedTextField();
 
+        setBorder(null);
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Gerenciar Funcionarios");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(null);
 
-        jComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario", " " }));
+        jComboBox.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
         jComboBox.setEnabled(false);
         jComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBox);
+        jComboBox.setBounds(10, 60, 340, 40);
 
+        jTableUsuarios.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -140,7 +190,10 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTableUsuarios);
 
-        jTextFieldSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 250, 1310, 370);
+
+        jTextFieldSenha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldSenha.setText("Senha");
         jTextFieldSenha.setEnabled(false);
         jTextFieldSenha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,8 +206,10 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jTextFieldSenhaKeyPressed(evt);
             }
         });
+        jPanel1.add(jTextFieldSenha);
+        jTextFieldSenha.setBounds(360, 60, 410, 40);
 
-        jTextFieldNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Usuário");
         jTextFieldNome.setEnabled(false);
         jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,8 +227,10 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jTextFieldNomeKeyPressed(evt);
             }
         });
+        jPanel1.add(jTextFieldNome);
+        jTextFieldNome.setBounds(10, 10, 350, 40);
 
-        jTextFieldSenha2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldSenha2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldSenha2.setText("Confirmar Senha");
         jTextFieldSenha2.setEnabled(false);
         jTextFieldSenha2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -186,23 +243,19 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jTextFieldSenha2KeyPressed(evt);
             }
         });
+        jPanel1.add(jTextFieldSenha2);
+        jTextFieldSenha2.setBounds(780, 60, 530, 40);
 
-        jButtonPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonPesquisar.setText("IMG");
-        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarActionPerformed(evt);
-            }
-        });
-
-        jTextFieldPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);
             }
         });
+        jPanel1.add(jTextFieldPesquisar);
+        jTextFieldPesquisar.setBounds(10, 200, 1070, 40);
 
-        jButtonSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSalvar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setEnabled(false);
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -210,36 +263,26 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jButtonSalvarActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonSalvar);
+        jButtonSalvar.setBounds(600, 160, 360, 32);
 
-        jButtonNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonNovo.setText("Novo");
-        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDeletar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonDeletar.setText("Deletar");
+        jButtonDeletar.setEnabled(false);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovoActionPerformed(evt);
+                jButtonDeletarActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonDeletar);
+        jButtonDeletar.setBounds(310, 160, 280, 32);
 
-        jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.setEnabled(false);
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.setEnabled(false);
-        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirActionPerformed(evt);
-            }
-        });
-
+        jTextFieldId.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldId.setEnabled(false);
+        jPanel1.add(jTextFieldId);
+        jTextFieldId.setBounds(1270, 110, 40, 40);
 
-        jButtonEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonEditar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonEditar.setText("Editar");
         jButtonEditar.setEnabled(false);
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +290,10 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jButtonEditarActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonEditar);
+        jButtonEditar.setBounds(970, 160, 340, 32);
 
+        jTextField_NomeCompleto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextField_NomeCompleto.setText("Nome Completo");
         jTextField_NomeCompleto.setEnabled(false);
         jTextField_NomeCompleto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -255,129 +301,132 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                 jTextField_NomeCompletoMouseClicked(evt);
             }
         });
-
-        jTextField_Ramal.setText("Ramal");
-        jTextField_Ramal.setEnabled(false);
-        jTextField_Ramal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField_RamalMouseClicked(evt);
+        jTextField_NomeCompleto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_NomeCompletoKeyPressed(evt);
             }
         });
+        jPanel1.add(jTextField_NomeCompleto);
+        jTextField_NomeCompleto.setBounds(750, 10, 560, 40);
 
-        jLabel2.setText("AVATAR");
+        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(1090, 200, 230, 40);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuário", "Nome Completo", "Ramal", "Cargo" }));
+        try {
+            jFormattedTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldCPF.setToolTipText("");
+        jFormattedTextFieldCPF.setEnabled(false);
+        jFormattedTextFieldCPF.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jPanel1.add(jFormattedTextFieldCPF);
+        jFormattedTextFieldCPF.setBounds(1080, 110, 180, 40);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_NomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_Ramal))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPesquisar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                            .addComponent(jTextFieldId))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_Ramal)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField_NomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonNovo)
-                                .addComponent(jButtonSalvar)
-                                .addComponent(jButtonEditar))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonCancelar)
-                                .addComponent(jButtonExcluir)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonPesquisar)
-                                .addComponent(jTextFieldId)))))
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setText("Telefone:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(370, 20, 100, 22);
+
+        jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonNovo);
+        jButtonNovo.setBounds(10, 160, 290, 32);
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("CPF:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(1020, 120, 50, 20);
+
+        jTextFieldEmail.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldEmail.setText("Email");
+        jTextFieldEmail.setEnabled(false);
+        jTextFieldEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldEmailMouseClicked(evt);
+            }
+        });
+        jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEmailActionPerformed(evt);
+            }
+        });
+        jTextFieldEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldEmailKeyPressed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEmail);
+        jTextFieldEmail.setBounds(10, 110, 340, 40);
+
+        jTextFieldRua.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldRua.setText("Rua do Funcionário");
+        jTextFieldRua.setEnabled(false);
+        jTextFieldRua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldRuaMouseClicked(evt);
+            }
+        });
+        jTextFieldRua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldRuaKeyPressed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldRua);
+        jTextFieldRua.setBounds(360, 110, 370, 40);
+
+        jComboBoxBairros.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBoxBairros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abolição", "Acari", "Água Santa", "Alto da Boa Vista", "Anchieta", "Andaraí", "Anil", "Araújo Cosmos", "Baía Guanabara", "Bancários", "Bangu", "Barra da Tijuca", "Barra de Guaratiba", "Barra Guaratiba", "Barros Filho", "Benfica", "Bento Ribeiro", "Bonsucesso", "Botafogo", "Braz de Pina", "Braz Pina", "Cachambi", "Cacuia", "Caju", "Camorim", "Campinho", "Campo dos Afonsos", "Campo Grande", "Cascadura", "Catete", "Catumbi", "Cavalcanti", "Centro", "Cidade de Deus", "Cidade Deus", "Cidade Nova", "Cidade Universitária", "Cocota", "Coelho Neto", "Colégio", "Copacabana", "Cordovil", "Cosme Velho", "Cosmos", "Costa Barros", "Curicica", "Curral Falso", "Delegado Castilho", "Dendê", "Deodoro", "Dumas", "Encantado", "Engenheiro Leal", "Engenho da Rainha", "Engenho de Dentro", "Engenho Novo", "Estácio", "Flamengo", "Freguesia", "Freguesia - Ilha Governador", "Freguesia - Jacarepaguá", "Galeão", "Gamboa", "Gardênia Azul", "Gávea", "Glória", "Grajaú", "Guadalupe", "Guarabu", "Guaratiba", "Higienópolis", "Honório Gurgel", "Humaitá", "Inhaúma", "Inhoaíba", "Ipanema", "Irajá", "Itacolomi", "Itanhangá", "Jacaré", "Jacarepaguá", "Jardim América", "Jardim Botânico", "Jardim Carioca", "Jardim Guanabara", "Jardim Sulacap", "Joa", "Lagoa", "Laranjeiras", "Leblon", "Leme", "Lins de Vasconcelos", "Lins Vasconcelos", "Loteamento Madean", "Madureira", "Magalhães Bastos", "Mangueira", "Manguinhos", "Maracanã", "Mare", "Marechal Hermes", "Maria da Graça", "Meier", "Moneró", "Nossa Senhora das Graças", "Nossa Senhora Graças", "Olaria", "Oswaldo Cruz", "Paciência", "Padre Miguel", "Paquetá", "Parada de Lucas", "Parada Lucas", "Parque Anchieta", "Parque Boa Esperança", "Pavuna", "Pechincha", "Pedra de Guaratiba", "Pedra Guaratiba", "Penha", "Penha Circular", "Piedade", "Pilares", "Pitangueiras", "Portuguesa", "Praça Bandeira", "Praça Seca", "Praia Bandeira", "Quintino Bocaiuva", "Ramos", "Realengo", "Recreio Bandeirantes", "Recreio dos Bandeirantes", "Riachuelo", "Ribeira", "Ricardo de Albuquerque", "Rio Comprido", "Rocha", "Rocha Miranda", "Rocinha", "Sampaio", "Santa Cruz", "Santa Teresa", "Santa Tereza", "Santíssimo", "Santo Cristo", "São Conrado", "São Cristóvão", "São Francisco Xavier", "Saúde", "Senador Camará", "Senador Vasconcelos", "Sepetiba", "Tanque", "Taquara", "Tauá", "Tijuca", "Todos Os Santos", "Tomás Coelho", "Tubiacanga", "Turiaçu", "Urca", "Vargem Grande", "Vargem Pequena", "Vaz Lobo", "Vicente de Carvalho", "Vidigal", "Vigário Geral", "Vila da Penha", "Vila Isabel", "Vila Kosmos", "Vila Militar", "Vila Penha", "Vila Valqueire", "Vista Alegre", "Zumbi" }));
+        jComboBoxBairros.setEnabled(false);
+        jPanel1.add(jComboBoxBairros);
+        jComboBoxBairros.setBounds(750, 110, 260, 40);
+
+        try {
+            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldTelefone.setToolTipText("");
+        jFormattedTextFieldTelefone.setEnabled(false);
+        jFormattedTextFieldTelefone.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jPanel1.add(jFormattedTextFieldTelefone);
+        jFormattedTextFieldTelefone.setBounds(470, 10, 270, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1335, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField_RamalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_RamalMouseClicked
-        if(jTextField_Ramal.getText().equals("Ramal")){
-            jTextField_Ramal.setText("");
-        }
-    }//GEN-LAST:event_jTextField_RamalMouseClicked
 
     private void jTextField_NomeCompletoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_NomeCompletoMouseClicked
         if(jTextField_NomeCompleto.getText().equals("Nome Completo")){
@@ -387,36 +436,34 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         flag = 2;
-        liberarCampos();
+        jTextFieldNome.setEnabled(true);
+        jTextFieldSenha.setEnabled(true);
+        jTextFieldSenha2.setEnabled(true);
+        jComboBox.setEnabled(true);
+        jTextField_NomeCompleto.setEnabled(true);
+        jFormattedTextFieldTelefone.setEnabled(true);
+        jTextFieldEmail.setEnabled(true);
+        jTextFieldRua.setEnabled(true);
+        jComboBoxBairros.setEnabled(true);
+        jFormattedTextFieldCPF.setEnabled(true);
+        
         habilitarBotoes();
         jTextFieldSenha2.setEnabled(false);
         jButtonEditar.setEnabled(false);
-        jButtonExcluir.setEnabled(false);
+        jButtonDeletar.setEnabled(false);
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        int resposta = 0;
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+                int resposta = 0;
         resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
         if(resposta ==JOptionPane.YES_OPTION){
             mod.setId(Integer.parseInt(jTextFieldId.getText()));
             control.excluir(mod);
             preencherTabela("select *from funcionarios order by usuario");
             desabilitarBotoes();
+            bloquearCampos();
         }
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
-
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        limparCampos();
-        bloquearCampos();
-        desabilitarBotoes();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        habilitarBotoes();
-        liberarCampos();
-        infoCampos();
-        flag =1;
-    }//GEN-LAST:event_jButtonNovoActionPerformed
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
 
@@ -428,12 +475,15 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
                 mod.setUsuario(jTextFieldNome.getText());
                 mod.setSenha(jTextFieldSenha.getText());
                 mod.setCargo((String) jComboBox.getSelectedItem());
-                mod.setRamal(Integer.parseInt(jTextField_Ramal.getText()));
+                mod.setRamal(Integer.parseInt(jFormattedTextFieldTelefone.getText()));
                 mod.setNomeCompleto(jTextField_NomeCompleto.getText());
+                mod.setEmail(jTextFieldEmail.getText());
+                mod.setRua(jTextFieldRua.getText());
+                mod.setBairro((String) jComboBoxBairros.getSelectedItem());
+                mod.setCpf(Long.parseLong(jFormattedTextFieldCPF.getText()));
                 //
                 control.Salvar(mod);
                 bloquearCampos();
-                limparCampos();
                 desabilitarBotoes();
                 preencherTabela("select * from funcionarios order by usuario");
             } else {
@@ -443,12 +493,15 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
             mod.setUsuario(jTextFieldNome.getText());
             mod.setSenha(jTextFieldSenha.getText());
             mod.setCargo((String) jComboBox.getSelectedItem());
-            mod.setRamal(Integer.parseInt(jTextField_Ramal.getText()));
+            mod.setRamal(Integer.parseInt(jFormattedTextFieldTelefone.getText()));
             mod.setNomeCompleto(jTextField_NomeCompleto.getText());
+            mod.setEmail(jTextFieldEmail.getText());
+            mod.setRua(jTextFieldRua.getText());
+            mod.setBairro((String) jComboBoxBairros.getSelectedItem());
+            mod.setCpf(Long.parseLong(jFormattedTextFieldCPF.getText()));
             mod.setId(Integer.parseInt(jTextFieldId.getText()));
             control.editar(mod);
             bloquearCampos();
-            limparCampos();
             desabilitarBotoes();
             preencherTabela("select *from funcionarios order by usuario");
             }
@@ -456,20 +509,15 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jTextFieldPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarActionPerformed
-        if(jTextFieldPesquisar.getText().equals("")){
-        }
-        else{
-            mod.setPesquisa(jTextFieldPesquisar.getText());
-            control.buscar(mod);
-            preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'");
+        if(!jTextFieldPesquisar.getText().equals("")){
+       
+        mod.setPesquisa(jTextFieldPesquisar.getText());
+        mod.setTipoPesquisa((String) jComboBox1.getSelectedItem());
+        control.buscar(mod);
+         preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'"+"and cargo like'"+mod.getTipoPesquisa()+"'"); 
+            
         }
     }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
-
-    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        mod.setPesquisa(jTextFieldPesquisar.getText());
-        control.buscar(mod);
-        preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'");
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTextFieldSenha2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSenha2KeyPressed
         if(jTextFieldSenha2.getText().equals("Confirmar Senha")){
@@ -521,16 +569,16 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
             jTextFieldNome.setText(conex.rs.getString("usuario"));
             jTextFieldSenha.setText(conex.rs.getString("senha"));
             jComboBox.setSelectedItem(conex.rs.getString("cargo"));
-            jTextField_Ramal.setText(String.valueOf(conex.rs.getInt("ramal")));
+            jFormattedTextFieldTelefone.setText(String.valueOf(conex.rs.getInt("ramal")));
+            jFormattedTextFieldCPF.setText(String.valueOf(conex.rs.getLong("cpf")));
             jTextField_NomeCompleto.setText(conex.rs.getString("nomecompleto"));
 
             desabilitarBotoes();
-            bloquearCampos();
+            
+       
 
-            jButtonNovo.setEnabled(true);
-            jButtonCancelar.setEnabled(true);
+            jButtonDeletar.setEnabled(true);
             jButtonEditar.setEnabled(true);
-            jButtonExcluir.setEnabled(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar os dados "+ex);
         }
@@ -541,30 +589,106 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxActionPerformed
+
+    private void jTextField_NomeCompletoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NomeCompletoKeyPressed
+        // TODO add your handling code here:
+        if(jTextField_NomeCompleto.getText().equals("Nome Completo")){
+            jTextField_NomeCompleto.setText("");
+        }
+    }//GEN-LAST:event_jTextField_NomeCompletoKeyPressed
+
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+        habilitarBotoes();
+        liberarCampos();
+        flag =1;
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jTextFieldEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldEmailMouseClicked
+        // TODO add your handling code here:
+        if(jTextFieldEmail.getText().equals("Email")){
+            jTextFieldEmail.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldEmailMouseClicked
+
+    private void jTextFieldEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmailKeyPressed
+        // TODO add your handling code here:
+        if(jTextFieldEmail.getText().equals("Email")){
+            jTextFieldEmail.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldEmailKeyPressed
+
+    private void jTextFieldRuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldRuaMouseClicked
+        // TODO add your handling code here:
+        if(jTextFieldRua.getText().equals("Rua do Funcionário")){
+            jTextFieldRua.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldRuaMouseClicked
+
+    private void jTextFieldRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldRuaKeyPressed
+        // TODO add your handling code here:
+         if(jTextFieldRua.getText().equals("Rua do Funcionário")){
+            jTextFieldRua.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldRuaKeyPressed
+
+    private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEmailActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+         mod.setPesquisa(jTextFieldPesquisar.getText());
+         mod.setTipoPesquisa((String) jComboBox1.getSelectedItem());
+        control.buscar(mod);
+        
+            mod.setPesquisa(jTextFieldPesquisar.getText());
+            mod.setTipoPesquisa((String) jComboBox1.getSelectedItem());
+            control.buscar(mod);
+             preencherTabela("select *from funcionarios where usuario like'%" + mod.getPesquisa()+ "%'"+"and cargo like'"+mod.getTipoPesquisa()+"'"); 
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
          public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
-          String [] colunas = new String []{"ID","Usuario","Senha","Cargo","Ramal","Nome Completo"};
+          String [] colunas = new String []{"ID","Usuario","Senha","Cargo","Ramal","Nome Completo","Email","Rua","Bairro","CPF"};
           conex.conectar();
           conex.executaSql(Sql);        
           try{
               conex.rs.first();
               do{
-                  dados.add(new Object[] { conex.rs.getInt("id"),conex.rs.getString("usuario"),conex.rs.getString("senha"),conex.rs.getString("cargo"),conex.rs.getString("ramal"),conex.rs.getString("nomecompleto") });
+                  dados.add(new Object[] { conex.rs.getInt("id"),conex.rs.getString("usuario"),conex.rs.getString("senha"),conex.rs.getString("cargo"),conex.rs.getString("ramal"),conex.rs.getString("nomecompleto"),conex.rs.getString("email"),conex.rs.getString("rua"),conex.rs.getString("bairro"),conex.rs.getString("cpf") });
               }while(conex.rs.next());
           }catch(SQLException ex){
-              JOptionPane.showMessageDialog(null, "Erro ao preencher Arraylist"+ex); 
+              
+              
           }
           modeloTabela modelo = new modeloTabela(dados, colunas);
           
           jTableUsuarios.setModel(modelo);
-          jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(43);
+          jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(40);
           jTableUsuarios.getColumnModel().getColumn(0).setResizable(false);
-          jTableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(180);
+          jTableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(250);
           jTableUsuarios.getColumnModel().getColumn(1).setResizable(false);
-          jTableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(160);
+          jTableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(250);
           jTableUsuarios.getColumnModel().getColumn(2).setResizable(false);
-          jTableUsuarios.getColumnModel().getColumn(3).setPreferredWidth(95);
+          jTableUsuarios.getColumnModel().getColumn(3).setPreferredWidth(250);
           jTableUsuarios.getColumnModel().getColumn(3).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(4).setPreferredWidth(150);
+          jTableUsuarios.getColumnModel().getColumn(4).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(5).setPreferredWidth(364);
+          jTableUsuarios.getColumnModel().getColumn(5).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(6).setPreferredWidth(250);
+          jTableUsuarios.getColumnModel().getColumn(6).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(7).setPreferredWidth(250);
+          jTableUsuarios.getColumnModel().getColumn(7).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(8).setPreferredWidth(250);
+          jTableUsuarios.getColumnModel().getColumn(8).setResizable(false);
+          jTableUsuarios.getColumnModel().getColumn(9).setPreferredWidth(150);
+          jTableUsuarios.getColumnModel().getColumn(9).setResizable(false);
+
           jTableUsuarios.getTableHeader().setReorderingAllowed(false);
           jTableUsuarios.setAutoResizeMode(jTableUsuarios.AUTO_RESIZE_OFF);
           jTableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -574,24 +698,27 @@ if(jTextFieldNome.getText().equals("Usuário") || jTextFieldSenha.getText().equa
          
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonDeletar;
     private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
-    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> jComboBoxBairros;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuarios;
+    private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesquisar;
+    private javax.swing.JTextField jTextFieldRua;
     private javax.swing.JTextField jTextFieldSenha;
     private javax.swing.JTextField jTextFieldSenha2;
     private javax.swing.JTextField jTextField_NomeCompleto;
-    private javax.swing.JTextField jTextField_Ramal;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="null"/>
+    </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
@@ -26,8 +29,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" pref="1335" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -35,8 +38,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="632" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -51,125 +54,19 @@
         </Property>
       </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextFieldNome" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField_NomeCompleto" min="-2" pref="236" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField_Ramal" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButtonNovo" min="-2" pref="74" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonSalvar" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonEditar" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonExcluir" min="-2" pref="76" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jComboBox1" min="-2" pref="82" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextFieldPesquisar" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonPesquisar" min="-2" pref="54" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldSenha" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextFieldSenha2" min="-2" pref="125" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jComboBox" min="-2" pref="185" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel2" alignment="0" pref="74" max="32767" attributes="0"/>
-                              <Component id="jTextFieldId" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField_Ramal" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="jTextFieldNome" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="jTextField_NomeCompleto" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextFieldSenha" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jTextFieldSenha2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                  <Component id="jButtonNovo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldPesquisar" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" alignment="1" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="jButtonPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldId" alignment="3" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="213" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="jComboBox">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="Administrador"/>
                 <StringItem index="1" value="Funcionario"/>
-                <StringItem index="2" value=" "/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -180,16 +77,29 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="60" width="340" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="250" width="1310" height="370"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTableUsuarios">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="0" rowCount="4"/>
                 </Property>
@@ -203,7 +113,7 @@
         <Component class="javax.swing.JTextField" name="jTextFieldSenha">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Senha"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -212,11 +122,16 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldSenhaMouseClicked"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldSenhaKeyPressed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="360" y="60" width="410" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNome">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -226,11 +141,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNomeActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldNomeKeyPressed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="10" width="350" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldSenha2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Confirmar Senha"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -239,32 +159,31 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldSenha2MouseClicked"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldSenha2KeyPressed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonPesquisar">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="IMG"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPesquisarActionPerformed"/>
-          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="780" y="60" width="530" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldPesquisar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPesquisarActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="200" width="1070" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -272,51 +191,46 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="600" y="160" width="360" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonNovo">
+        <Component class="javax.swing.JButton" name="jButtonDeletar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Novo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNovoActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCancelar">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="text" type="java.lang.String" value="Deletar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeletarActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonExcluir">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Excluir"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
-          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="160" width="280" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1270" y="110" width="40" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonEditar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -324,44 +238,363 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="970" y="160" width="340" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField_NomeCompleto">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Nome Completo"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_NomeCompletoMouseClicked"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_NomeCompletoKeyPressed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField_Ramal">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ramal"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_RamalMouseClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="AVATAR"/>
-          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="750" y="10" width="560" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Usu&#xe1;rio"/>
-                <StringItem index="1" value="Nome Completo"/>
-                <StringItem index="2" value="Ramal"/>
-                <StringItem index="3" value="Cargo"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Administrador"/>
+                <StringItem index="1" value="Funcionario"/>
               </StringArray>
             </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox1ItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1090" y="200" width="230" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCPF">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="###########" subtype="-1" type="5"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1080" y="110" width="180" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Telefone:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="370" y="20" width="100" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonNovo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Novo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNovoActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="160" width="290" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="CPF:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1020" y="120" width="50" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldEmail">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Email"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldEmailMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldEmailActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldEmailKeyPressed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="110" width="340" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldRua">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Rua do Funcion&#xe1;rio"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldRuaMouseClicked"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldRuaKeyPressed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="360" y="110" width="370" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxBairros">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="176">
+                <StringItem index="0" value="Aboli&#xe7;&#xe3;o"/>
+                <StringItem index="1" value="Acari"/>
+                <StringItem index="2" value="&#xc1;gua Santa"/>
+                <StringItem index="3" value="Alto da Boa Vista"/>
+                <StringItem index="4" value="Anchieta"/>
+                <StringItem index="5" value="Andara&#xed;"/>
+                <StringItem index="6" value="Anil"/>
+                <StringItem index="7" value="Ara&#xfa;jo Cosmos"/>
+                <StringItem index="8" value="Ba&#xed;a Guanabara"/>
+                <StringItem index="9" value="Banc&#xe1;rios"/>
+                <StringItem index="10" value="Bangu"/>
+                <StringItem index="11" value="Barra da Tijuca"/>
+                <StringItem index="12" value="Barra de Guaratiba"/>
+                <StringItem index="13" value="Barra Guaratiba"/>
+                <StringItem index="14" value="Barros Filho"/>
+                <StringItem index="15" value="Benfica"/>
+                <StringItem index="16" value="Bento Ribeiro"/>
+                <StringItem index="17" value="Bonsucesso"/>
+                <StringItem index="18" value="Botafogo"/>
+                <StringItem index="19" value="Braz de Pina"/>
+                <StringItem index="20" value="Braz Pina"/>
+                <StringItem index="21" value="Cachambi"/>
+                <StringItem index="22" value="Cacuia"/>
+                <StringItem index="23" value="Caju"/>
+                <StringItem index="24" value="Camorim"/>
+                <StringItem index="25" value="Campinho"/>
+                <StringItem index="26" value="Campo dos Afonsos"/>
+                <StringItem index="27" value="Campo Grande"/>
+                <StringItem index="28" value="Cascadura"/>
+                <StringItem index="29" value="Catete"/>
+                <StringItem index="30" value="Catumbi"/>
+                <StringItem index="31" value="Cavalcanti"/>
+                <StringItem index="32" value="Centro"/>
+                <StringItem index="33" value="Cidade de Deus"/>
+                <StringItem index="34" value="Cidade Deus"/>
+                <StringItem index="35" value="Cidade Nova"/>
+                <StringItem index="36" value="Cidade Universit&#xe1;ria"/>
+                <StringItem index="37" value="Cocota"/>
+                <StringItem index="38" value="Coelho Neto"/>
+                <StringItem index="39" value="Col&#xe9;gio"/>
+                <StringItem index="40" value="Copacabana"/>
+                <StringItem index="41" value="Cordovil"/>
+                <StringItem index="42" value="Cosme Velho"/>
+                <StringItem index="43" value="Cosmos"/>
+                <StringItem index="44" value="Costa Barros"/>
+                <StringItem index="45" value="Curicica"/>
+                <StringItem index="46" value="Curral Falso"/>
+                <StringItem index="47" value="Delegado Castilho"/>
+                <StringItem index="48" value="Dend&#xea;"/>
+                <StringItem index="49" value="Deodoro"/>
+                <StringItem index="50" value="Dumas"/>
+                <StringItem index="51" value="Encantado"/>
+                <StringItem index="52" value="Engenheiro Leal"/>
+                <StringItem index="53" value="Engenho da Rainha"/>
+                <StringItem index="54" value="Engenho de Dentro"/>
+                <StringItem index="55" value="Engenho Novo"/>
+                <StringItem index="56" value="Est&#xe1;cio"/>
+                <StringItem index="57" value="Flamengo"/>
+                <StringItem index="58" value="Freguesia"/>
+                <StringItem index="59" value="Freguesia - Ilha Governador"/>
+                <StringItem index="60" value="Freguesia - Jacarepagu&#xe1;"/>
+                <StringItem index="61" value="Gale&#xe3;o"/>
+                <StringItem index="62" value="Gamboa"/>
+                <StringItem index="63" value="Gard&#xea;nia Azul"/>
+                <StringItem index="64" value="G&#xe1;vea"/>
+                <StringItem index="65" value="Gl&#xf3;ria"/>
+                <StringItem index="66" value="Graja&#xfa;"/>
+                <StringItem index="67" value="Guadalupe"/>
+                <StringItem index="68" value="Guarabu"/>
+                <StringItem index="69" value="Guaratiba"/>
+                <StringItem index="70" value="Higien&#xf3;polis"/>
+                <StringItem index="71" value="Hon&#xf3;rio Gurgel"/>
+                <StringItem index="72" value="Humait&#xe1;"/>
+                <StringItem index="73" value="Inha&#xfa;ma"/>
+                <StringItem index="74" value="Inhoa&#xed;ba"/>
+                <StringItem index="75" value="Ipanema"/>
+                <StringItem index="76" value="Iraj&#xe1;"/>
+                <StringItem index="77" value="Itacolomi"/>
+                <StringItem index="78" value="Itanhang&#xe1;"/>
+                <StringItem index="79" value="Jacar&#xe9;"/>
+                <StringItem index="80" value="Jacarepagu&#xe1;"/>
+                <StringItem index="81" value="Jardim Am&#xe9;rica"/>
+                <StringItem index="82" value="Jardim Bot&#xe2;nico"/>
+                <StringItem index="83" value="Jardim Carioca"/>
+                <StringItem index="84" value="Jardim Guanabara"/>
+                <StringItem index="85" value="Jardim Sulacap"/>
+                <StringItem index="86" value="Joa"/>
+                <StringItem index="87" value="Lagoa"/>
+                <StringItem index="88" value="Laranjeiras"/>
+                <StringItem index="89" value="Leblon"/>
+                <StringItem index="90" value="Leme"/>
+                <StringItem index="91" value="Lins de Vasconcelos"/>
+                <StringItem index="92" value="Lins Vasconcelos"/>
+                <StringItem index="93" value="Loteamento Madean"/>
+                <StringItem index="94" value="Madureira"/>
+                <StringItem index="95" value="Magalh&#xe3;es Bastos"/>
+                <StringItem index="96" value="Mangueira"/>
+                <StringItem index="97" value="Manguinhos"/>
+                <StringItem index="98" value="Maracan&#xe3;"/>
+                <StringItem index="99" value="Mare"/>
+                <StringItem index="100" value="Marechal Hermes"/>
+                <StringItem index="101" value="Maria da Gra&#xe7;a"/>
+                <StringItem index="102" value="Meier"/>
+                <StringItem index="103" value="Moner&#xf3;"/>
+                <StringItem index="104" value="Nossa Senhora das Gra&#xe7;as"/>
+                <StringItem index="105" value="Nossa Senhora Gra&#xe7;as"/>
+                <StringItem index="106" value="Olaria"/>
+                <StringItem index="107" value="Oswaldo Cruz"/>
+                <StringItem index="108" value="Paci&#xea;ncia"/>
+                <StringItem index="109" value="Padre Miguel"/>
+                <StringItem index="110" value="Paquet&#xe1;"/>
+                <StringItem index="111" value="Parada de Lucas"/>
+                <StringItem index="112" value="Parada Lucas"/>
+                <StringItem index="113" value="Parque Anchieta"/>
+                <StringItem index="114" value="Parque Boa Esperan&#xe7;a"/>
+                <StringItem index="115" value="Pavuna"/>
+                <StringItem index="116" value="Pechincha"/>
+                <StringItem index="117" value="Pedra de Guaratiba"/>
+                <StringItem index="118" value="Pedra Guaratiba"/>
+                <StringItem index="119" value="Penha"/>
+                <StringItem index="120" value="Penha Circular"/>
+                <StringItem index="121" value="Piedade"/>
+                <StringItem index="122" value="Pilares"/>
+                <StringItem index="123" value="Pitangueiras"/>
+                <StringItem index="124" value="Portuguesa"/>
+                <StringItem index="125" value="Pra&#xe7;a Bandeira"/>
+                <StringItem index="126" value="Pra&#xe7;a Seca"/>
+                <StringItem index="127" value="Praia Bandeira"/>
+                <StringItem index="128" value="Quintino Bocaiuva"/>
+                <StringItem index="129" value="Ramos"/>
+                <StringItem index="130" value="Realengo"/>
+                <StringItem index="131" value="Recreio Bandeirantes"/>
+                <StringItem index="132" value="Recreio dos Bandeirantes"/>
+                <StringItem index="133" value="Riachuelo"/>
+                <StringItem index="134" value="Ribeira"/>
+                <StringItem index="135" value="Ricardo de Albuquerque"/>
+                <StringItem index="136" value="Rio Comprido"/>
+                <StringItem index="137" value="Rocha"/>
+                <StringItem index="138" value="Rocha Miranda"/>
+                <StringItem index="139" value="Rocinha"/>
+                <StringItem index="140" value="Sampaio"/>
+                <StringItem index="141" value="Santa Cruz"/>
+                <StringItem index="142" value="Santa Teresa"/>
+                <StringItem index="143" value="Santa Tereza"/>
+                <StringItem index="144" value="Sant&#xed;ssimo"/>
+                <StringItem index="145" value="Santo Cristo"/>
+                <StringItem index="146" value="S&#xe3;o Conrado"/>
+                <StringItem index="147" value="S&#xe3;o Crist&#xf3;v&#xe3;o"/>
+                <StringItem index="148" value="S&#xe3;o Francisco Xavier"/>
+                <StringItem index="149" value="Sa&#xfa;de"/>
+                <StringItem index="150" value="Senador Camar&#xe1;"/>
+                <StringItem index="151" value="Senador Vasconcelos"/>
+                <StringItem index="152" value="Sepetiba"/>
+                <StringItem index="153" value="Tanque"/>
+                <StringItem index="154" value="Taquara"/>
+                <StringItem index="155" value="Tau&#xe1;"/>
+                <StringItem index="156" value="Tijuca"/>
+                <StringItem index="157" value="Todos Os Santos"/>
+                <StringItem index="158" value="Tom&#xe1;s Coelho"/>
+                <StringItem index="159" value="Tubiacanga"/>
+                <StringItem index="160" value="Turia&#xe7;u"/>
+                <StringItem index="161" value="Urca"/>
+                <StringItem index="162" value="Vargem Grande"/>
+                <StringItem index="163" value="Vargem Pequena"/>
+                <StringItem index="164" value="Vaz Lobo"/>
+                <StringItem index="165" value="Vicente de Carvalho"/>
+                <StringItem index="166" value="Vidigal"/>
+                <StringItem index="167" value="Vig&#xe1;rio Geral"/>
+                <StringItem index="168" value="Vila da Penha"/>
+                <StringItem index="169" value="Vila Isabel"/>
+                <StringItem index="170" value="Vila Kosmos"/>
+                <StringItem index="171" value="Vila Militar"/>
+                <StringItem index="172" value="Vila Penha"/>
+                <StringItem index="173" value="Vila Valqueire"/>
+                <StringItem index="174" value="Vista Alegre"/>
+                <StringItem index="175" value="Zumbi"/>
+              </StringArray>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="750" y="110" width="260" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldTelefone">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="#########" subtype="-1" type="5"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="470" y="10" width="270" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
       </SubComponents>
     </Container>

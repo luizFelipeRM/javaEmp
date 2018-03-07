@@ -7,9 +7,13 @@ package Clientes;
 
 import DB.ConnectMYSQL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.MaskFormatter;
 /**
  *
  * @author luiz
@@ -21,38 +25,60 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     int flag =1;
     
+    
+    public telaGerenciarClientes() {
+        initComponents();
+        preencherTabela("select *from clientes order by nome");
+    }
+
+    
     public void preencherTabela(String Sql){
       ArrayList dados = new ArrayList();
-      String [] colunas = new String []{"ID","Nome","Credito"};
+      String [] colunas = new String []{"ID","Nome","Rua","Bairro","Complemento","Cpf"};
       conex.conectar();
       conex.executaSql(Sql);        
       try{
           conex.rs.first();
           do{
-              dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getDouble("credito")});
+              dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("rua"),conex.rs.getString("bairro"),conex.rs.getString("complemento"),conex.rs.getString("cpfcnpj")});
           }while(conex.rs.next());
       }catch(SQLException ex){
-          JOptionPane.showMessageDialog(null, "Erro ao preencher Arraylist"+ex); 
+          JOptionPane.showMessageDialog(null, "erro tabela clientes"+ex);
+          
       }
       Clientes.modeloTabela modelo = new Clientes.modeloTabela(dados, colunas);
 
       jTableCliente.setModel(modelo);
       jTableCliente.getColumnModel().getColumn(0).setPreferredWidth(70);
       jTableCliente.getColumnModel().getColumn(0).setResizable(false);
-      jTableCliente.getColumnModel().getColumn(1).setPreferredWidth(760);
+      
+      jTableCliente.getColumnModel().getColumn(1).setPreferredWidth(315);
       jTableCliente.getColumnModel().getColumn(1).setResizable(false);
-      jTableCliente.getColumnModel().getColumn(2).setPreferredWidth(500);
+      
+      jTableCliente.getColumnModel().getColumn(2).setPreferredWidth(315);
       jTableCliente.getColumnModel().getColumn(2).setResizable(false);
+      
+      jTableCliente.getColumnModel().getColumn(3).setPreferredWidth(315);
+      jTableCliente.getColumnModel().getColumn(3).setResizable(false);
+      
+      jTableCliente.getColumnModel().getColumn(4).setPreferredWidth(315);
+      jTableCliente.getColumnModel().getColumn(4).setResizable(false);
+      
+      jTableCliente.getColumnModel().getColumn(5).setPreferredWidth(315);
+      jTableCliente.getColumnModel().getColumn(5).setResizable(false);
+
+      
       jTableCliente.getTableHeader().setReorderingAllowed(false);
       jTableCliente.setAutoResizeMode(jTableCliente.AUTO_RESIZE_OFF);
       jTableCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       conex.desconecta();
   }
-    public telaGerenciarClientes() {
-        initComponents();
-        preencherTabela("select *from clientes order by nome");
-    }
-
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,18 +91,22 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCliente = new javax.swing.JTable();
-        jPanel15 = new javax.swing.JPanel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldId = new javax.swing.JTextField();
-        jLabel = new javax.swing.JLabel();
-        jButton15 = new javax.swing.JButton();
-        jTextFieldCredito = new javax.swing.JTextField();
-        jButtonDeletar14 = new javax.swing.JButton();
         jTextFieldPesquisar = new javax.swing.JTextField();
+        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jButtonDeletar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jFormattedTextFieldCPFCNPJ = new javax.swing.JFormattedTextField();
+        jTextFieldRua = new javax.swing.JTextField();
+        jComboBoxBairros = new javax.swing.JComboBox<>();
+        jTextFieldComplemento = new javax.swing.JTextField();
+        jButtonNovo = new javax.swing.JButton();
+        jButtonEnviar = new javax.swing.JButton();
 
         setBorder(null);
         setClosable(true);
         setTitle("Gerenciar Clientes");
+        getContentPane().setLayout(null);
 
         jTableCliente.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableCliente.setModel(new javax.swing.table.DefaultTableModel(
@@ -97,96 +127,8 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTableCliente);
 
-        jPanel15.setBorder(new javax.swing.border.MatteBorder(null));
-
-        jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldNome.setText("Nome do Cliente");
-        jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNomeMouseClicked(evt);
-            }
-        });
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
-            }
-        });
-        jTextFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldNomeKeyPressed(evt);
-            }
-        });
-
-        jTextFieldId.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldId.setEnabled(false);
-
-        jLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel.setText("Credito:");
-
-        jButton15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton15.setText("Enviar");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCredito.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldCredito.setText("R$: 00,00");
-        jTextFieldCredito.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldCreditoMouseClicked(evt);
-            }
-        });
-
-        jButtonDeletar14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButtonDeletar14.setText("Deletar");
-        jButtonDeletar14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeletar14ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.DEFAULT_SIZE, 1386, Short.MAX_VALUE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonDeletar14, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel)
-                            .addComponent(jTextFieldCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButtonDeletar14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 160, 1340, 490);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,44 +136,139 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
                 jTextFieldPesquisarActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldPesquisar);
+        jTextFieldPesquisar.setBounds(10, 120, 1340, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldPesquisar)
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jTextFieldId.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldId.setEnabled(false);
+        getContentPane().add(jTextFieldId);
+        jTextFieldId.setBounds(10, 10, 50, 40);
+
+        jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldNome.setText("Nome do Cliente");
+        jTextFieldNome.setEnabled(false);
+        jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldNomeMouseClicked(evt);
+            }
+        });
+        jTextFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNomeKeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldNome);
+        jTextFieldNome.setBounds(70, 10, 450, 40);
+
+        jButtonDeletar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonDeletar.setText("Deletar");
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonDeletar);
+        jButtonDeletar.setBounds(1240, 0, 110, 100);
+
+        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPF", "CNPJ" }));
+        jComboBox1.setEnabled(false);
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(530, 10, 140, 40);
+
+        try {
+            jFormattedTextFieldCPFCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldCPFCNPJ.setEnabled(false);
+        jFormattedTextFieldCPFCNPJ.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextFieldCPFCNPJ);
+        jFormattedTextFieldCPFCNPJ.setBounds(680, 10, 300, 40);
+
+        jTextFieldRua.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldRua.setText("Rua do Cliente");
+        jTextFieldRua.setEnabled(false);
+        jTextFieldRua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldRuaMouseClicked(evt);
+            }
+        });
+        jTextFieldRua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldRuaKeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldRua);
+        jTextFieldRua.setBounds(10, 60, 400, 40);
+
+        jComboBoxBairros.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBoxBairros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abolição", "Acari", "Água Santa", "Alto da Boa Vista", "Anchieta", "Andaraí", "Anil", "Araújo Cosmos", "Baía Guanabara", "Bancários", "Bangu", "Barra da Tijuca", "Barra de Guaratiba", "Barra Guaratiba", "Barros Filho", "Benfica", "Bento Ribeiro", "Bonsucesso", "Botafogo", "Braz de Pina", "Braz Pina", "Cachambi", "Cacuia", "Caju", "Camorim", "Campinho", "Campo dos Afonsos", "Campo Grande", "Cascadura", "Catete", "Catumbi", "Cavalcanti", "Centro", "Cidade de Deus", "Cidade Deus", "Cidade Nova", "Cidade Universitária", "Cocota", "Coelho Neto", "Colégio", "Copacabana", "Cordovil", "Cosme Velho", "Cosmos", "Costa Barros", "Curicica", "Curral Falso", "Delegado Castilho", "Dendê", "Deodoro", "Dumas", "Encantado", "Engenheiro Leal", "Engenho da Rainha", "Engenho de Dentro", "Engenho Novo", "Estácio", "Flamengo", "Freguesia", "Freguesia - Ilha Governador", "Freguesia - Jacarepaguá", "Galeão", "Gamboa", "Gardênia Azul", "Gávea", "Glória", "Grajaú", "Guadalupe", "Guarabu", "Guaratiba", "Higienópolis", "Honório Gurgel", "Humaitá", "Inhaúma", "Inhoaíba", "Ipanema", "Irajá", "Itacolomi", "Itanhangá", "Jacaré", "Jacarepaguá", "Jardim América", "Jardim Botânico", "Jardim Carioca", "Jardim Guanabara", "Jardim Sulacap", "Joa", "Lagoa", "Laranjeiras", "Leblon", "Leme", "Lins de Vasconcelos", "Lins Vasconcelos", "Loteamento Madean", "Madureira", "Magalhães Bastos", "Mangueira", "Manguinhos", "Maracanã", "Mare", "Marechal Hermes", "Maria da Graça", "Meier", "Moneró", "Nossa Senhora das Graças", "Nossa Senhora Graças", "Olaria", "Oswaldo Cruz", "Paciência", "Padre Miguel", "Paquetá", "Parada de Lucas", "Parada Lucas", "Parque Anchieta", "Parque Boa Esperança", "Pavuna", "Pechincha", "Pedra de Guaratiba", "Pedra Guaratiba", "Penha", "Penha Circular", "Piedade", "Pilares", "Pitangueiras", "Portuguesa", "Praça Bandeira", "Praça Seca", "Praia Bandeira", "Quintino Bocaiuva", "Ramos", "Realengo", "Recreio Bandeirantes", "Recreio dos Bandeirantes", "Riachuelo", "Ribeira", "Ricardo de Albuquerque", "Rio Comprido", "Rocha", "Rocha Miranda", "Rocinha", "Sampaio", "Santa Cruz", "Santa Teresa", "Santa Tereza", "Santíssimo", "Santo Cristo", "São Conrado", "São Cristóvão", "São Francisco Xavier", "Saúde", "Senador Camará", "Senador Vasconcelos", "Sepetiba", "Tanque", "Taquara", "Tauá", "Tijuca", "Todos Os Santos", "Tomás Coelho", "Tubiacanga", "Turiaçu", "Urca", "Vargem Grande", "Vargem Pequena", "Vaz Lobo", "Vicente de Carvalho", "Vidigal", "Vigário Geral", "Vila da Penha", "Vila Isabel", "Vila Kosmos", "Vila Militar", "Vila Penha", "Vila Valqueire", "Vista Alegre", "Zumbi" }));
+        jComboBoxBairros.setEnabled(false);
+        getContentPane().add(jComboBoxBairros);
+        jComboBoxBairros.setBounds(420, 60, 280, 40);
+
+        jTextFieldComplemento.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldComplemento.setText("Numero e Complemento");
+        jTextFieldComplemento.setEnabled(false);
+        jTextFieldComplemento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldComplementoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jTextFieldComplemento);
+        jTextFieldComplemento.setBounds(710, 60, 270, 40);
+
+        jButtonNovo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonNovo);
+        jButtonNovo.setBounds(1000, 0, 110, 100);
+
+        jButtonEnviar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnviarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonEnviar);
+        jButtonEnviar.setBounds(1120, 0, 110, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClienteMouseClicked
-
+        flag = 2;
+        
+        jTextFieldNome.setEnabled(true);
+        jTextFieldId.setEnabled(true);
+        jTextFieldRua.setEnabled(true);;
+        jComboBox1.setEnabled(true);
+        jFormattedTextFieldCPFCNPJ.setEnabled(true);
+        jComboBoxBairros.setEnabled(true);
+        jTextFieldComplemento.setEnabled(true);
+        
         String nome =""+jTableCliente.getValueAt(jTableCliente.getSelectedRow(), 1);
         conex.conectar();
         conex.executaSql("select *from clientes where nome='"+nome+"'");
         try {
-            flag =2;
             conex.rs.first();
             jTextFieldId.setText(String.valueOf(conex.rs.getInt("id")));
             jTextFieldNome.setText(conex.rs.getString("nome"));
-            jTextFieldCredito.setText(String.valueOf(conex.rs.getDouble("credito")));
+            jTextFieldRua.setText(conex.rs.getString("rua"));
+            jComboBoxBairros.setSelectedItem(conex.rs.getString("bairro"));
+            jTextFieldComplemento.setText(conex.rs.getString("complemento"));
+            jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar os dados "+ex);
@@ -240,86 +277,160 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         conex.desconecta();
     }//GEN-LAST:event_jTableClienteMouseClicked
 
-    private void jTextFieldNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomeMouseClicked
-        if(jTextFieldNome.getText().equals("Nome do Cliente")){
-            jTextFieldNome.setText("");
-        }
-    }//GEN-LAST:event_jTextFieldNomeMouseClicked
-
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
-
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
-
-    private void jTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyPressed
-        if(jTextFieldNome.getText().equals("Nome do Cliente")){
-            jTextFieldNome.setText("");
-        }
-    }//GEN-LAST:event_jTextFieldNomeKeyPressed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        if(flag == 1){
-
-            mod.setNome(jTextFieldNome.getText());
-            mod.setCredito(Double.parseDouble(jTextFieldCredito.getText()));
-            control.Salvar(mod);
-            preencherTabela("select *from clientes order by nome");
-            jTextFieldNome.setText("");
-            jTextFieldId.setText("");
-            jTextFieldCredito.setText("");
-        }else{
-
-            mod.setNome(jTextFieldNome.getText());
-            mod.setCredito(Double.parseDouble(jTextFieldCredito.getText()));
-            mod.setId(Integer.parseInt(jTextFieldId.getText()));
-            control.editar(mod);
-
-            jTextFieldNome.setText("");
-            jTextFieldId.setText("");
-            jTextFieldCredito.setText("");
-
-            preencherTabela("select *from clientes order by nome");
-
-        }
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jTextFieldCreditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCreditoMouseClicked
-        if(jTextFieldCredito.getText().equals("R$: 00,00")){
-            jTextFieldCredito.setText("");
-        }
-    }//GEN-LAST:event_jTextFieldCreditoMouseClicked
-
-    private void jButtonDeletar14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletar14ActionPerformed
-        int resposta = 0;
-        
-       if(jTableCliente.getSelectedRow() != -1){  
-        resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?");
-        if(resposta ==JOptionPane.YES_OPTION){
-            mod.setId(Integer.parseInt(jTextFieldId.getText()));
-            control.excluir(mod);
-            preencherTabela("select *from clientes order by nome");
-        }
-      }else{
-           JOptionPane.showMessageDialog(null, "Favor selecionar um cliente para excluir");
-       }
-    }//GEN-LAST:event_jButtonDeletar14ActionPerformed
-
     private void jTextFieldPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarActionPerformed
         mod.setPesquisa(jTextFieldPesquisar.getText());
         control.buscar(mod);
         preencherTabela("select *from clientes where nome like '%" + mod.getPesquisa()+ "%'");
     }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
 
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        // TODO add your handling code here:
+        int resposta =0;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        if(resposta ==JOptionPane.YES_OPTION){
+            mod.setId(Integer.parseInt(jTextFieldId.getText()));
+            control.excluir(mod);
+            escrevereTrancar();
+            preencherTabela("select *from clientes order by nome");
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        flag =1;
+        limpareLiberar();
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
+        // TODO add your handling code here:
+            if(flag == 1){
+            mod.setNome(jTextFieldNome.getText());
+            mod.setCpfcnpj(jFormattedTextFieldCPFCNPJ.getText());
+            mod.setRua(jTextFieldRua.getText());
+            mod.setBairro((String) jComboBoxBairros.getSelectedItem());
+            mod.setComplemento(jTextFieldComplemento.getText());
+            control.Salvar(mod);
+            preencherTabela("select *from clientes order by nome");
+            escrevereTrancar();
+        }else{
+            mod.setNome(jTextFieldNome.getText());
+            mod.setCpfcnpj(jFormattedTextFieldCPFCNPJ.getText());
+            mod.setRua(jTextFieldRua.getText());
+            mod.setBairro((String) jComboBoxBairros.getSelectedItem());
+            mod.setComplemento(jTextFieldComplemento.getText());
+            mod.setId(Integer.parseInt(jTextFieldId.getText()));
+            control.editar(mod);
+            preencherTabela("select *from clientes order by nome");
+            escrevereTrancar();
+
+        }
+    }//GEN-LAST:event_jButtonEnviarActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        if(jComboBox1.getSelectedItem().equals("CPF")){
+            MaskFormatter format;  
+            try {
+                jFormattedTextFieldCPFCNPJ.setFormatterFactory(null); 
+                format = new MaskFormatter("###.###.###-##");
+                jFormattedTextFieldCPFCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(format));  
+                jFormattedTextFieldCPFCNPJ.setValue(null);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao formatar para CPF"+ex);
+            }
+        }else{
+            MaskFormatter format;
+             try {
+                jFormattedTextFieldCPFCNPJ.setFormatterFactory(null); 
+                format = new MaskFormatter("###.###.###/####-##");
+                jFormattedTextFieldCPFCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(format));  
+                jFormattedTextFieldCPFCNPJ.setValue(null);
+            } catch (ParseException ex) {
+               JOptionPane.showMessageDialog(null, "Erro ao formatar para CNPJ"+ex);
+            }
+            
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jTextFieldNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomeMouseClicked
+        // TODO add your handling code here:
+        if(jTextFieldNome.getText().equals("Nome do Cliente")){
+            jTextFieldNome.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldNomeMouseClicked
+
+    private void jTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyPressed
+        // TODO add your handling code here:
+                if(jTextFieldNome.getText().equals("Nome do Cliente")){
+            jTextFieldNome.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldNomeKeyPressed
+
+    private void jTextFieldRuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldRuaMouseClicked
+        // TODO add your handling code here
+                        if(jTextFieldNome.getText().equals("Rua do Cliente")){
+            jTextFieldNome.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldRuaMouseClicked
+
+    private void jTextFieldRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldRuaKeyPressed
+        // TODO add your handling code here:
+                        if(jTextFieldNome.getText().equals("Rua do Cliente")){
+            jTextFieldNome.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldRuaKeyPressed
+
+    private void jTextFieldComplementoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldComplementoMouseClicked
+        // TODO add your handling code here:
+             if(jTextFieldNome.getText().equals("Numero e Complemento")){
+            jTextFieldNome.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldComplementoMouseClicked
+    public void limpareLiberar(){
+        
+        
+        
+        jTextFieldNome.setEnabled(true);
+        jTextFieldId.setEnabled(true);
+        jTextFieldRua.setEnabled(true);;
+        jComboBox1.setEnabled(true);
+        jFormattedTextFieldCPFCNPJ.setEnabled(true);
+        jComboBoxBairros.setEnabled(true);
+        jTextFieldComplemento.setEnabled(true);
+
+    }
+    public void escrevereTrancar(){
+        
+        jTextFieldNome.setText("Nome do Cliente");
+        jTextFieldId.setText("");
+        jTextFieldRua.setText("Rua do Cliente");
+        jComboBox1.setSelectedItem("CPF");
+        jFormattedTextFieldCPFCNPJ.setText("");
+        jComboBoxBairros.setSelectedItem("Abolição");
+        jTextFieldComplemento.setText("Numeros e Complementos");
+        
+        jTextFieldNome.setEnabled(false);
+        jTextFieldId.setEnabled(false);
+        jTextFieldRua.setEnabled(false);;
+        jComboBox1.setEnabled(false);
+        jFormattedTextFieldCPFCNPJ.setEnabled(false);
+        jComboBoxBairros.setEnabled(false);
+        jTextFieldComplemento.setEnabled(false);
+ 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButtonDeletar14;
-    private javax.swing.JLabel jLabel;
-    private javax.swing.JPanel jPanel15;
+    private javax.swing.JButton jButtonDeletar;
+    private javax.swing.JButton jButtonEnviar;
+    private javax.swing.JButton jButtonNovo;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxBairros;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCPFCNPJ;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCliente;
-    private javax.swing.JTextField jTextFieldCredito;
+    private javax.swing.JTextField jTextFieldComplemento;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesquisar;
+    private javax.swing.JTextField jTextFieldRua;
     // End of variables declaration//GEN-END:variables
 }

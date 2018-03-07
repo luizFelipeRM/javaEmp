@@ -13,6 +13,10 @@ public class beansCliente {
     private double credito;
     private int desconto;
     private String pesquisa;
+    private String rua;
+    private String bairro;
+    private String complemento;
+    private String cpfcnpj;
 
     /**
      * @return the nome
@@ -83,6 +87,64 @@ public class beansCliente {
     public void setPesquisa(String pesquisa) {
         this.pesquisa = pesquisa;
     }
+
+    /**
+     * @return the rua
+     */
+    public String getRua() {
+        return rua;
+    }
+
+    /**
+     * @param rua the rua to set
+     */
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the complemento
+     */
+    public String getComplemento() {
+        return complemento;
+    }
+
+    /**
+     * @param complemento the complemento to set
+     */
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    /**
+     * @return the cpfcnpj
+     */
+    public String getCpfcnpj() {
+        return cpfcnpj;
+    }
+
+    /**
+     * @param cpfcnpj the cpfcnpj to set
+     */
+    public void setCpfcnpj(String cpfcnpj) {
+        this.cpfcnpj = cpfcnpj;
+    }
+
+
 
   
     

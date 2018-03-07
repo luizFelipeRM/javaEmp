@@ -29,9 +29,12 @@ public class daoCliente {
         conex.conectar();
         
         try {
-            PreparedStatement pst = conex.con.prepareStatement("insert into clientes(nome,credito) values(?,?)");
+            PreparedStatement pst = conex.con.prepareStatement("insert into clientes(nome,rua,bairro,complemento,cpfcnpj) values(?,?,?,?,?)");
             pst.setString(1, mod.getNome());
-            pst.setDouble(2, mod.getCredito());
+            pst.setString(2, mod.getRua());
+            pst.setString(3, mod.getBairro());
+            pst.setString(4, mod.getComplemento());
+            pst.setString   (5, mod.getCpfcnpj());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
         } catch (SQLException ex) {
@@ -43,10 +46,13 @@ public class daoCliente {
          public void editar(beansCliente mod){
       conex.conectar();
         try {
-            PreparedStatement pst = conex.con.prepareStatement("update clientes set nome=?, credito=? where id=?"); //alteração
+            PreparedStatement pst = conex.con.prepareStatement("update clientes set nome=?, rua=?, bairro=?, complemento=?, cpfcnpj=? where id=?"); //alteração
             pst.setString   (1, mod.getNome());
-            pst.setDouble   (2, mod.getCredito());
-            pst.setInt      (3, mod.getId());
+            pst.setString   (2, mod.getRua());
+            pst.setString   (3, mod.getBairro());
+            pst.setString   (4, mod.getComplemento());
+            pst.setString     (5, mod.getCpfcnpj());
+            pst.setInt      (6, mod.getId());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Dados alterados com sucessos");
         } catch (SQLException ex) {
@@ -80,12 +86,14 @@ public class daoCliente {
             // preencherTabela("select *from funcionarios order by usuario");
             conex.executaSql("select *from clientes where nome like'%" + mod.getPesquisa()+"%'");
             conex.rs.first();
-            mod.setId(conex.rs.getInt("id"));
-            mod.setNome(conex.rs.getString("nome"));
-            mod.setCredito(conex.rs.getDouble("credito"));
+            mod.setId           (conex.rs.getInt("id"));
+            mod.setNome         (conex.rs.getString("nome"));
+            mod.setRua          (conex.rs.getString("rua"));
+            mod.setBairro       (conex.rs.getString("bairro"));
+            mod.setComplemento  (conex.rs.getString("complemento"));
+            mod.setCpfcnpj      (conex.rs.getString("cpfcnpj"));
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar usuario /nErro"+ex);
         }       
         conex.desconecta();       
         return mod;

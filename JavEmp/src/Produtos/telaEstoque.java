@@ -10,7 +10,9 @@ import Funcionarios.modeloTabela;
 import static java.lang.Thread.sleep;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -18,7 +20,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author luiz
  */
-public class telaEstoque extends javax.swing.JInternalFrame {
+public class telaEstoque extends javax.swing.JInternalFrame{
 
     /**
      * Creates new form telaEstoque
@@ -26,17 +28,43 @@ public class telaEstoque extends javax.swing.JInternalFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     beansProdutos mod = new beansProdutos();
     daoProdutos dao = new daoProdutos();
-    int x = 1;
-
-    public telaEstoque() throws InterruptedException {
-        initComponents();
-        while(x == 1){
-            sleep(1000);
-            preencherTabela("select *from produtos order by nome");
+    
+    
+           public void atualizarTabela() {
+             while (true) {
+                try {
+                   if(jComboBoxTipoDoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisar.getText().equals("")){
+                    preencherTabela("select *from produtos order by nome");
+                    
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisar.getText());
+                            dao.buscar(mod);
+                            preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                      }                        
+                }else{
+                      mod.setPesquisa(jTextFieldPesquisar.getText());
+                      mod.setTipoPesquisa((String) jComboBoxTipoDoProduto.getSelectedItem());
+                      dao.buscar(mod);                      
+                      preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+                      
         }
-        
-            
-        
+                    Thread.sleep(30000);
+             } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+    }
+  }
+    
+    public telaEstoque(){
+        initComponents();
+        preencherTabela("select *from produtos order by nome");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            atualizarTabela();
+            }
+        }).start();   
     }
 
     /**
@@ -55,6 +83,9 @@ public class telaEstoque extends javax.swing.JInternalFrame {
         jComboBoxTipoDoProduto = new javax.swing.JComboBox<>();
 
         setBorder(null);
+        setClosable(true);
+        setTitle("Estoque");
+        getContentPane().setLayout(null);
 
         jTableEstoqueProdutos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableEstoqueProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,6 +101,9 @@ public class telaEstoque extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableEstoqueProdutos);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(12, 113, 1330, 560);
+
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton1.setText("Adicionar Quantidade");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +111,8 @@ public class telaEstoque extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(10, 0, 1330, 80);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,37 +120,18 @@ public class telaEstoque extends javax.swing.JInternalFrame {
                 jTextFieldPesquisarActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldPesquisar);
+        jTextFieldPesquisar.setBounds(10, 80, 1020, 35);
 
         jComboBoxTipoDoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipoDoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1736, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxTipoDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxTipoDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
+        jComboBoxTipoDoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoDoProdutoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxTipoDoProduto);
+        jComboBoxTipoDoProduto.setBounds(1030, 80, 310, 31);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,12 +149,28 @@ public class telaEstoque extends javax.swing.JInternalFrame {
         mod.setId((int) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 0));
         mod.setNome((String) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 1));
         mod.setTipo((String) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 2));
-        mod.setValor((Double) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 3));
-        mod.setEstoque((int) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 4) + quantidade);
-        dao.editar(mod);
-        preencherTabela("select *from produtos order by nome");
+        mod.setMarca((String) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 3));        
+        mod.setValor((Double) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 4));
+        mod.setEstoque((int) jTableEstoqueProdutos.getValueAt(jTableEstoqueProdutos.getSelectedRow(), 5) + quantidade);
 
-       }
+        dao.editar(mod);
+           
+            if(jComboBoxTipoDoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisar.getText().equals("")){
+                    preencherTabela("select *from produtos order by nome");
+                    
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisar.getText());
+                            dao.buscar(mod);
+                            preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                      }                        
+                }else{
+                      mod.setPesquisa(jTextFieldPesquisar.getText());
+                      mod.setTipoPesquisa((String) jComboBoxTipoDoProduto.getSelectedItem());
+                      dao.buscar(mod);                      
+                      preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");                    
+        }
+      }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -152,39 +185,50 @@ public class telaEstoque extends javax.swing.JInternalFrame {
             preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
         }
         
-        
-        
-        
     }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
+
+    private void jComboBoxTipoDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoDoProdutoActionPerformed
+        mod.setPesquisa(jTextFieldPesquisar.getText());
+        mod.setTipoPesquisa((String) jComboBoxTipoDoProduto.getSelectedItem());
+        dao.buscar(mod);
+        if(jComboBoxTipoDoProduto.getSelectedItem() == "Todos"){
+            preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+        }else{
+            preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }
+    }//GEN-LAST:event_jComboBoxTipoDoProdutoActionPerformed
 
     
 
     public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
-          String [] colunas = new String []{"ID","Nome","Tipo","Valor","Estoque"};
+          String [] colunas = new String []{"ID","Nome","Tipo","Marca","Valor","Estoque"};
           conex.conectar();
           conex.executaSql(Sql);        
           try{
               conex.rs.first();
               do{
-                  dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("tipo"),conex.rs.getDouble("valor"),conex.rs.getInt("estoque")});
+                  dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("tipo"),conex.rs.getString("marca"),conex.rs.getDouble("valor"),conex.rs.getInt("estoque")});
               }while(conex.rs.next());
           }catch(SQLException ex){
-              JOptionPane.showMessageDialog(null, "Erro ao preencher Arraylist"+ex); 
+              
+              
           }
           modeloTabela modelo = new modeloTabela(dados, colunas);
           
           jTableEstoqueProdutos.setModel(modelo);
           jTableEstoqueProdutos.getColumnModel().getColumn(0).setPreferredWidth(70);
           jTableEstoqueProdutos.getColumnModel().getColumn(0).setResizable(false);
-          jTableEstoqueProdutos.getColumnModel().getColumn(1).setPreferredWidth(315);
+          jTableEstoqueProdutos.getColumnModel().getColumn(1).setPreferredWidth(253);
           jTableEstoqueProdutos.getColumnModel().getColumn(1).setResizable(false);
-          jTableEstoqueProdutos.getColumnModel().getColumn(2).setPreferredWidth(315);
+          jTableEstoqueProdutos.getColumnModel().getColumn(2).setPreferredWidth(252);
           jTableEstoqueProdutos.getColumnModel().getColumn(2).setResizable(false);
-          jTableEstoqueProdutos.getColumnModel().getColumn(3).setPreferredWidth(315);
+          jTableEstoqueProdutos.getColumnModel().getColumn(3).setPreferredWidth(252);
           jTableEstoqueProdutos.getColumnModel().getColumn(3).setResizable(false);
-          jTableEstoqueProdutos.getColumnModel().getColumn(4).setPreferredWidth(315);
+          jTableEstoqueProdutos.getColumnModel().getColumn(4).setPreferredWidth(252);
           jTableEstoqueProdutos.getColumnModel().getColumn(4).setResizable(false);
+          jTableEstoqueProdutos.getColumnModel().getColumn(5).setPreferredWidth(252);
+          jTableEstoqueProdutos.getColumnModel().getColumn(5).setResizable(false);          
           jTableEstoqueProdutos.getTableHeader().setReorderingAllowed(false);
           jTableEstoqueProdutos.setAutoResizeMode(jTableEstoqueProdutos.AUTO_RESIZE_OFF);
           jTableEstoqueProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

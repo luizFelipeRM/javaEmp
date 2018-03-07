@@ -25,19 +25,51 @@ public class daoPedidos {
             PreparedStatement pst = conex.con.prepareStatement("insert into compra(nome,valor,quantidade,data) values(?,?,?,?)");
             pst.setString(1, mod.getNomeClienteCompra());
             pst.setDouble(2, mod.getValorCompral());
-            pst.setInt(3, mod.getQuantidadeCompra());
+            pst.setInt   (3, mod.getQuantidadeCompra());
             pst.setString(4, mod.getData());
-            
+       
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir dados /n"+ex);
         }
         conex.desconecta();
     }
     
+    public void Excluir(beansPedido mod){
+        conex.conectar();
+        try {
+            PreparedStatement pst = conex.con.prepareStatement("delete from compra where id=?");
+            pst.setInt(1, mod.getIdCompra());
+            pst.execute();
+            
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Erro ao excluir dados/nErro:" +ex);
+        }
+        
+        conex.desconecta();
+        
+    }
     
-    
+    public beansPedido Buscar(beansPedido mod){
+        conex.conectar(); 
+        try {   
+            
+            conex.executaSql("select *from compra where nome like'%" + mod.getPesquisa()+ "%'");
+            conex.rs.first();
+            
+            mod.setIdCompra(conex.rs.getInt("id"));
+            mod.setNomeClienteCompra(conex.rs.getString("nome"));
+            mod.setValorCompra(conex.rs.getDouble("valor"));
+            mod.setQuantidadeCompra(conex.rs.getInt("quantidade"));
+            mod.setData(conex.rs.getString("data"));            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Esse Cliente Não Fez um Pedido");
+        }       
+        conex.desconecta();       
+        return mod;
+    }  
+       
     
     
 }

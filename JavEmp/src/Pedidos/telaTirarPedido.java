@@ -36,25 +36,67 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     daoEstatisticaPesquisa daoEstatistica = new daoEstatisticaPesquisa();
     DefaultListModel MODELO;
     int Enter = 0;
-    
+    int estoque;
     
     //transformei as variaveis em arrays p criar 1 tabela e não só 1 coluna da tabela
     int idProduto;
     String nomeProduto = null;
     String tipoProduto;
+    String marcaProduto;
     double valorProduto;
     int    estoqueProduto;
     int    quantidadeProduto = 1;
     carrinhoTableModel tableModel = new carrinhoTableModel();
     
-    
+    public void atualizarTabela() {
+             while (true) {
+                try {
+                 modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                 modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                 controlProdutos.buscar(modProdutos);
+                        if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                    preencherTabelaProdutos("select *from produtos order by nome");
+                    
+                        }else{
+                            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            controlProdutos.buscar(modProdutos);
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
+                      }                        
+                }else{
+                      modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                      modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                      controlProdutos.buscar(modProdutos);                      
+                      preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'"+"and tipo like'"+modProdutos.getTipoPesquisa()+"'");
+                      
+        }       
+                    
+                    
+                    
+                    
+   
+                    Thread.sleep(15000);
+             } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+         }
+        }    
+ }
     public telaTirarPedido() {
         initComponents();
-        preencherTabelaProdutos("select *from produtos ORDER BY nome");
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+            atualizarTabela();
+            }
+        }).start();   
         jTable_Carrinho.setModel(tableModel);
         jScrollPane1.setVisible(false);
         MODELO = new DefaultListModel();
         jList.setModel(MODELO);
+        
+        jLabel2.setVisible(false);
+        jTextFieldNome.setVisible(false);
+        jLabelNomeCliente.setVisible(false);
     }
 
     /**
@@ -67,6 +109,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -76,11 +120,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jFormattedTextFieldQuantidade = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList = new javax.swing.JList<>();
         jButtonRemover = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
-        jTextFieldNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldValorAtual = new javax.swing.JTextField();
@@ -94,18 +135,41 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldQuantidade = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setClosable(true);
         setTitle("Tirar Pedido");
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jScrollPane1MousePressed(evt);
+            }
+        });
+
+        jList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jList.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jList);
+
+        jLayeredPane1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 80, 380, 240);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Escolher Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setToolTipText("");
         jPanel2.setLayout(null);
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Nome do Produto");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(274, 14, 119, 15);
+        jLabel6.setBounds(430, 30, 200, 22);
 
+        jTableProdutos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -125,16 +189,18 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTableProdutos);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 60, 632, 190);
+        jScrollPane2.setBounds(10, 100, 1310, 190);
 
+        jTextFieldPesquisarProduto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarProdutoActionPerformed(evt);
             }
         });
         jPanel2.add(jTextFieldPesquisarProduto);
-        jTextFieldPesquisarProduto.setBounds(14, 38, 521, 19);
+        jTextFieldPesquisarProduto.setBounds(10, 60, 990, 40);
 
+        jComboBoxTipodoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipodoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
         jComboBoxTipodoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,11 +208,12 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(jComboBoxTipodoProduto);
-        jComboBoxTipodoProduto.setBounds(541, 35, 105, 24);
+        jComboBoxTipodoProduto.setBounds(1000, 60, 320, 40);
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setText("Tipo");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(584, 14, 29, 15);
+        jLabel7.setBounds(1120, 30, 60, 22);
 
         jFormattedTextFieldQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jFormattedTextFieldQuantidade.setText("Única");
@@ -173,25 +240,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel1.setBounds(14, 588, 85, 15);
 
         jLayeredPane1.add(jPanel2);
-        jPanel2.setBounds(0, 198, 660, 260);
+        jPanel2.setBounds(10, 238, 1330, 300);
 
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jScrollPane1MousePressed(evt);
-            }
-        });
-
-        jList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jList);
-
-        jLayeredPane1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 250, 140);
-
+        jButtonRemover.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButtonRemover.setText("Remover");
         jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,8 +250,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jButtonRemover);
-        jButtonRemover.setBounds(360, 140, 100, 25);
+        jButtonRemover.setBounds(650, 180, 270, 60);
 
+        jButtonLimpar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,42 +260,31 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jButtonLimpar);
-        jButtonLimpar.setBounds(470, 140, 95, 25);
+        jButtonLimpar.setBounds(350, 180, 270, 60);
 
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
-            }
-        });
-        jTextFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldNomeKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldNomeKeyReleased(evt);
-            }
-        });
-        jLayeredPane1.add(jTextFieldNome);
-        jTextFieldNome.setBounds(10, 20, 250, 30);
-
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Nome do Cliente");
         jLayeredPane1.add(jLabel2);
-        jLabel2.setBounds(34, 1, 112, 15);
+        jLabel2.setBounds(34, 1, 170, 22);
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Valor Atual");
         jLayeredPane1.add(jLabel5);
-        jLabel5.setBounds(530, 0, 75, 15);
+        jLabel5.setBounds(1140, 0, 130, 22);
 
         jTextFieldValorAtual.setEditable(false);
+        jTextFieldValorAtual.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldValorAtual.setText("0.0");
         jTextFieldValorAtual.setEnabled(false);
         jLayeredPane1.add(jTextFieldValorAtual);
-        jTextFieldValorAtual.setBounds(520, 20, 110, 30);
+        jTextFieldValorAtual.setBounds(1070, 20, 270, 30);
 
-        jLabel3.setText("Saldo");
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("Saldo do Cliente");
         jLayeredPane1.add(jLabel3);
-        jLabel3.setBounds(440, 0, 38, 15);
+        jLabel3.setBounds(810, 0, 190, 22);
 
+        jTextFieldSaldo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldSaldo.setText("R$00,00");
         jTextFieldSaldo.setEnabled(false);
         jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -252,26 +293,29 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jTextFieldSaldo);
-        jTextFieldSaldo.setBounds(420, 20, 85, 30);
+        jTextFieldSaldo.setBounds(740, 20, 290, 30);
 
-        jButton5.setText("Finalizar Pedido");
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton5.setText("                                                 Finalizar Pedido");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         jLayeredPane1.add(jButton5);
-        jButton5.setBounds(10, 490, 660, 20);
+        jButton5.setBounds(0, 590, 1350, 60);
 
-        jButtonEditar.setText("Editar QTD");
+        jButtonEditar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonEditar.setText("Editar Quantidade");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditarActionPerformed(evt);
             }
         });
         jLayeredPane1.add(jButtonEditar);
-        jButtonEditar.setBounds(240, 140, 110, 25);
+        jButtonEditar.setBounds(940, 180, 270, 60);
 
+        jTable_Carrinho.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTable_Carrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -287,12 +331,14 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable_Carrinho);
 
         jLayeredPane1.add(jScrollPane3);
-        jScrollPane3.setBounds(130, 50, 530, 83);
+        jScrollPane3.setBounds(390, 50, 950, 130);
 
+        jLabelNomeCliente.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
-        jLabelNomeCliente.setBounds(280, 30, 120, 20);
+        jLabelNomeCliente.setBounds(460, 20, 180, 20);
 
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setText("Adicionar ao Carrinho");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,12 +346,14 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jButton2);
-        jButton2.setBounds(250, 460, 410, 25);
+        jButton2.setBounds(350, 540, 1000, 50);
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Quantidade:");
         jLayeredPane1.add(jLabel4);
-        jLabel4.setBounds(10, 460, 90, 15);
+        jLabel4.setBounds(0, 550, 140, 30);
 
+        jTextFieldQuantidade.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldQuantidade.setText("Única");
         jTextFieldQuantidade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -318,7 +366,40 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jTextFieldQuantidade);
-        jTextFieldQuantidade.setBounds(100, 460, 140, 20);
+        jTextFieldQuantidade.setBounds(130, 540, 220, 50);
+
+        jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeActionPerformed(evt);
+            }
+        });
+        jTextFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNomeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNomeKeyReleased(evt);
+            }
+        });
+        jLayeredPane1.add(jTextFieldNome);
+        jTextFieldNome.setBounds(10, 40, 380, 40);
+
+        jCheckBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Comprar agora");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.add(jCheckBox1);
+        jCheckBox1.setBounds(20, 90, 190, 30);
 
         getContentPane().add(jLayeredPane1);
 
@@ -335,7 +416,22 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     }  
     */
     
-    public String getDataAtual() {
+    
+    public boolean checarAdicionar(String produto){
+     if(jTable_Carrinho.getRowCount()>0){   
+        for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
+            boolean igual;
+            if(jTable_Carrinho.getValueAt(i, 0).equals(produto)){
+                return false;                               
+        }
+      }
+        return true;
+     }   
+    
+        return true;  
+ }     
+    
+    public String getMesAtual() {
 		Calendar calendar = new GregorianCalendar();
                 Date data = new Date(System.currentTimeMillis());  
                 //SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -343,6 +439,15 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
 		return formatarDate.format(data);               
 	}
+    
+    public String getDataAtual() {
+        Calendar calendar = new GregorianCalendar();
+                Date data = new Date(System.currentTimeMillis());  
+                //SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
+                SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
+
+		return formatarDate.format(data);  
+    }
 
     
     public void ListaDePesquisas(){
@@ -385,8 +490,12 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         conex.rs.first();
         jTextFieldSaldo.setText(conex.rs.getString("credito"));
         jLabelNomeCliente.setText(conex.rs.getString("nome"));
+            jCheckBox1.setVisible(true);
+        
         }catch(SQLException ex){
+            Enter =1;
             JOptionPane.showMessageDialog(null, "Nome de cliente inexistente");
+            jCheckBox1.setVisible(true);
         }
         conex.desconecta();
     }    
@@ -416,11 +525,34 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
            beans.setNome((String) jTable_Carrinho.getValueAt(i, 0));
            beans.setQuantidade((int) jTable_Carrinho.getValueAt(i, 1));
            beans.setValor((double) jTable_Carrinho.getValueAt(i, 2));
-           beans.setData(getDataAtual());
+           beans.setMarca((String)jTable_Carrinho.getValueAt(i, 3));
+           beans.setData(getMesAtual());
            
            daoEstatistica.Salvar(beans);
-      }
-        
+      }            
+    }
+    
+    private void DiminuirEstoque(){
+        for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
+            try{
+            conex.conectar();
+            conex.executaSql("select *from produtos where nome='"+jTable_Carrinho.getValueAt(i, 0)+"'");
+            conex.rs.first();
+            int quantidadeFinalizarCompra = (int) jTable_Carrinho.getValueAt(i, 1);
+            modProdutos.setNome(conex.rs.getString("nome"));
+            modProdutos.setTipo(conex.rs.getString("tipo"));
+            modProdutos.setValor(conex.rs.getDouble("valor"));
+            modProdutos.setMarca(conex.rs.getString("marca"));
+            modProdutos.setEstoque(conex.rs.getInt("estoque") - quantidadeFinalizarCompra);
+            modProdutos.setId(conex.rs.getInt("id"));
+            
+            controlProdutos.editar(modProdutos);
+            conex.desconecta();
+    
+        }catch(SQLException ex){
+                   JOptionPane.showMessageDialog(null, "erro ao editar estoque");
+           }
+        }
     }
     
     public void voltarPadrao(){
@@ -446,10 +578,11 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         try {
 
             conex.rs.first();
-            //transformei antes as variaveis em arrays
+
             idProduto      = (conex.rs.getInt("id"));
             nomeProduto    = (conex.rs.getString("nome"));
             tipoProduto    = (conex.rs.getString("tipo"));
+            marcaProduto   = (conex.rs.getString("marca"));
             valorProduto   = (double) (conex.rs.getDouble("valor"));
             estoqueProduto = (conex.rs.getInt("estoque"));
         } catch (SQLException ex) {
@@ -462,29 +595,32 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
     public void preencherTabelaProdutos(String Sql){
           ArrayList dados = new ArrayList();
-          String [] colunas = new String []{"ID","Nome","Tipo","Valor","Estoque"};
+          String [] colunas = new String []{"ID","Nome","Tipo","Marca","Valor","Estoque"};
           conex.conectar();
           conex.executaSql(Sql);        
           try{
               conex.rs.first();
               do{
-                  dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("tipo"),conex.rs.getDouble("valor"),conex.rs.getInt("estoque")});
+                  dados.add(new Object[]{conex.rs.getInt("id"),conex.rs.getString("nome"),conex.rs.getString("tipo"),conex.rs.getString("marca"),conex.rs.getDouble("valor"),conex.rs.getInt("estoque")});
               }while(conex.rs.next());
           }catch(SQLException ex){
-              JOptionPane.showMessageDialog(null, "Erro ao preencher Arraylist"+ex); 
+              
+              
           }
           modeloTabela modelo = new modeloTabela(dados, colunas);
           
           jTableProdutos.setModel(modelo);
-          jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(43);
+          jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(50);
           jTableProdutos.getColumnModel().getColumn(0).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(121);
+          jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(295);
           jTableProdutos.getColumnModel().getColumn(1).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(2).setPreferredWidth(90);
+          jTableProdutos.getColumnModel().getColumn(2).setPreferredWidth(295);
           jTableProdutos.getColumnModel().getColumn(2).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(3).setPreferredWidth(85);
+          jTableProdutos.getColumnModel().getColumn(3).setPreferredWidth(295);
           jTableProdutos.getColumnModel().getColumn(3).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(4).setPreferredWidth(85);
+          jTableProdutos.getColumnModel().getColumn(3).setPreferredWidth(295);
+          jTableProdutos.getColumnModel().getColumn(3).setResizable(false);
+          jTableProdutos.getColumnModel().getColumn(4).setPreferredWidth(293);
           jTableProdutos.getColumnModel().getColumn(4).setResizable(false);
           jTableProdutos.getTableHeader().setReorderingAllowed(false);
           jTableProdutos.setAutoResizeMode(jTableProdutos.AUTO_RESIZE_OFF);
@@ -497,6 +633,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
           
             p.setId(idProduto);
             p.setDescricao(nomeProduto);
+            p.setMarca(marcaProduto);
             p.setQtd(quantidadeProduto);
             p.setValor(valorProduto);
         
@@ -504,14 +641,25 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
        }
     
     private void jTextFieldPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarProdutoActionPerformed
-        modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-        modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-        controlProdutos.buscar(modProdutos);
-        if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
-            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
-        }else{
-            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'"+"and tipo like'"+modProdutos.getTipoPesquisa()+"'");
-        }
+            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+            modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+            controlProdutos.buscar(modProdutos);
+                        if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                    preencherTabelaProdutos("select *from produtos order by nome");
+                    
+                        }else{
+                            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            controlProdutos.buscar(modProdutos);
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
+                      }                        
+                }else{
+                      modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                      modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                      controlProdutos.buscar(modProdutos);                      
+                      preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'"+"and tipo like'"+modProdutos.getTipoPesquisa()+"'");
+                      
+        }       
     }//GEN-LAST:event_jTextFieldPesquisarProdutoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -523,31 +671,46 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
          double valorAtual = Double.parseDouble(CalculaTotal());
          
             if(valorAtual != 0.0 ){
+              if(jCheckBox1.isSelected()){
+                  Salvar();
+                                  
+                   JOptionPane.showMessageDialog(null, "Pedido concluido"); 
+                    voltarPadrao();
+                    limparTabela();
+              }else{
+
                 if(!jLabelNomeCliente.getText().equals("Nome do Cliente")){
+ 
                     
-                    JOptionPane.showMessageDialog(null,getDataAtual());
-                   
+                    DiminuirEstoque();
+                   //Salvando no BD de compra pra dps
                     mod.setNomeClienteCompra(jLabelNomeCliente.getText());
                     mod.setValorCompra(valorAtual);                                        
                     mod.setQuantidadeCompra(CalcularQuantidadeTotal());
                     mod.setData(getDataAtual());
                     dao.Salvar(mod);
-                    
+                                        
+                   //Salvando nas estatisticas
                     Salvar();
+                    
+                                
+                   JOptionPane.showMessageDialog(null, "Pedido concluido e enviado à tela de entregas");
                     
                     jComboBoxTipodoProduto.setSelectedItem("Todos");
                     preencherTabelaProdutos("select *from produtos order by nome");
                     
                     voltarPadrao();
+                    limparTabela();
                     
        
        }else{
                     JOptionPane.showMessageDialog(null, "Favor selecionar cliente antes de finalizar o pedido");
                 }
+              }
       }else{
                 JOptionPane.showMessageDialog(null, "Favor adicionar um ou mais produtos à tabela antes de finalizar o pedido");
             }
-     }
+       }    
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jFormattedTextFieldQuantidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQuantidadeMouseClicked
@@ -565,21 +728,32 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jFormattedTextFieldQuantidadeKeyPressed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
 
 
         String perguntaQuantidade;
 
         perguntaQuantidade = JOptionPane.showInputDialog(null, "Qual a quantidade?", JOptionPane.PLAIN_MESSAGE);
 
-        try {
-            int estoque = 5000;
+
+          try{
+            conex.conectar();
+            conex.executaSql("select *from produtos where nome='"+jTable_Carrinho.getValueAt(jTable_Carrinho.getSelectedRow(), 0)+"'");
+            conex.rs.first();
+            estoque = conex.rs.getInt("estoque");
+            conex.desconecta();
+            
+            }catch(SQLException ex){
+                   JOptionPane.showMessageDialog(null, "erro ao salvar estoque");
+                    }
+          
+          try{  
+           
             int quantidade = new Integer(perguntaQuantidade);
-            if (quantidade > 0 && quantidade < estoque) {
+            if (quantidade > 0 && quantidade <= estoque) {
                 //TESTAR VV
                 tableModel.setQuantidade(jTable_Carrinho.getSelectedRow(), quantidade);
-                
-                
+         
                 //valorProduto = valorProduto * quantidadeProduto;
                 jTextFieldValorAtual.setText(CalculaTotal());
                 jTable_Carrinho.clearSelection();
@@ -593,6 +767,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         } catch (NumberFormatException  exception) {
             JOptionPane.showMessageDialog(null,"Apenas numeros são validos");
         }
+
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
@@ -623,15 +798,22 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
         jScrollPane1.setVisible(false);
-        Enter = 1;        
+        Enter = 1;
+        if(Enter == 1){
+            jCheckBox1.setVisible(false);
+        }else
+            jCheckBox1.setVisible(true);
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private void jTextFieldNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyReleased
         // TODO add your handling code here:
         if(Enter == 0){
             ListaDePesquisas();
+            jCheckBox1.setVisible(false);
+            
         }else{ 
             Enter = 0;
+            jCheckBox1.setVisible(true);
         }
     }//GEN-LAST:event_jTextFieldNomeKeyReleased
 
@@ -666,26 +848,54 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private void jTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){   
             jScrollPane1.setVisible(false);
-     }    
+         if(Enter == 1){  
+            jCheckBox1.setVisible(true);
+            }else{
+             jCheckBox1.setVisible(false);
+         }
+        }
     }//GEN-LAST:event_jTextFieldNomeKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:            
+    try{
+            conex.conectar();
+            conex.executaSql("select *from produtos where nome='"+jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 1)+"'");
+            conex.rs.first();
+            estoque = conex.rs.getInt("estoque");
+            conex.desconecta();
+             
+            }catch(SQLException ex){
+                   JOptionPane.showMessageDialog(null, "erro ao salvar estoque");
+                    }        
+    
         if(nomeProduto != null ){
+          if(checarAdicionar(nomeProduto) == true){
             if(jTextFieldQuantidade.getText().equals("Única")||jTextFieldQuantidade.getText().equals("")){
                 quantidadeProduto = 1;  
+                    if(quantidadeProduto <= estoque){
                 preencherTabelaCarrinho();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Estoque menor do que a quantidade");
+                    }
             }else{
                 quantidadeProduto = Integer.parseInt(jTextFieldQuantidade.getText());
                 valorProduto = valorProduto * quantidadeProduto;
+                if(quantidadeProduto <= estoque){
                 preencherTabelaCarrinho();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Estoque menor do que a quantidade");
+                    }
+                
             }
             jTextFieldValorAtual.setText(CalculaTotal());
             jTableProdutos.clearSelection();
             jTable_Carrinho.clearSelection();
             jTextFieldQuantidade.setText("Única");
-        }
+        }else{
+              JOptionPane.showMessageDialog(null, "Produto já adicionado, favor editar sua quantidade ");
+          }
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jFormattedTextFieldQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQuantidadeActionPerformed
@@ -694,14 +904,14 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
     private void jTextFieldQuantidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeMouseClicked
         // TODO add your handling code here:
-        if(jTextFieldQuantidade.getText().equals("Ùnica")){
+        if(jTextFieldQuantidade.getText().equals("Única")){
             jTextFieldQuantidade.setText("");
         }
     }//GEN-LAST:event_jTextFieldQuantidadeMouseClicked
 
     private void jTextFieldQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeKeyPressed
         // TODO add your handling code here:
-        if(jTextFieldQuantidade.getText().equals("Ùnica")){
+        if(jTextFieldQuantidade.getText().equals("Única")){
             jTextFieldQuantidade.setText("");
         }
     }//GEN-LAST:event_jTextFieldQuantidadeKeyPressed
@@ -710,12 +920,30 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipodoProdutoActionPerformed
 
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+             jLabel2.setVisible(false);
+             jTextFieldNome.setVisible(false);
+             jLabelNomeCliente.setVisible(false);
+        }else{
+             jLabel2.setVisible(true);
+             jTextFieldNome.setVisible(true);
+             jLabelNomeCliente.setVisible(true);
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonRemover;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBoxTipodoProduto;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
     private javax.swing.JLabel jLabel1;

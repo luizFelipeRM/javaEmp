@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class carrinhoTableModel extends AbstractTableModel{
 
     private List<beansCarrinho> dados = new ArrayList<>();
-    private String[] colunas = {"Produto","QTD","Valor"};
+    private String[] colunas = {"Produto","QTD","Valor","Marca"};
 
     @Override
     public String getColumnName(int column) {
@@ -34,6 +34,8 @@ public class carrinhoTableModel extends AbstractTableModel{
                 return dados.get(linha).getQtd();
             case 2: 
                 return dados.get(linha).getValor();
+            case 3:
+                return dados.get(linha).getMarca();
         }
         
         return null;

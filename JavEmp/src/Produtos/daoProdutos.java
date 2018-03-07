@@ -24,11 +24,13 @@ public class daoProdutos {
     public void Salvar(beansProdutos mod) {
         conex.conectar();
         try {
-            PreparedStatement pst = conex.con.prepareStatement("insert into produtos(nome,tipo,valor,estoque) values(?,?,?,?)");
+            PreparedStatement pst = conex.con.prepareStatement("insert into produtos(nome,tipo,marca,valor,estoque) values(?,?,?,?,?)");
             pst.setString(1, mod.getNome());
             pst.setString(2, mod.getTipo());
-            pst.setDouble(3, mod.getValor());
-            pst.setInt   (4, mod.getEstoque());
+            pst.setString(3, mod.getMarca());            
+            pst.setDouble(4, mod.getValor());
+            pst.setInt   (5, mod.getEstoque());
+
             
             pst.execute();
             JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
@@ -60,15 +62,15 @@ public class daoProdutos {
     public void editar(beansProdutos mod){
       conex.conectar();
         try {
-            PreparedStatement pst = conex.con.prepareStatement("update produtos set nome=?, tipo=?, valor=?, estoque=? where id=?"); //alteração
+            PreparedStatement pst = conex.con.prepareStatement("update produtos set nome=?, tipo=?, valor=?, marca=?, estoque=? where id=?"); //alteração
             pst.setString   (1, mod.getNome());
             pst.setString   (2, mod.getTipo());
             pst.setDouble   (3, mod.getValor());
-            pst.setInt      (4, mod.getEstoque());
-            pst.setInt      (5, mod.getId());
+            pst.setString   (4, mod.getMarca());
+            pst.setInt      (5, mod.getEstoque());
+            pst.setInt      (6, mod.getId());
             
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Dados alterados com sucessos");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro na alteração dos dados /nErro:"+ex );
         }
@@ -103,7 +105,8 @@ public class daoProdutos {
             mod.setNome(conex.rs.getString("nome"));
             mod.setTipo(conex.rs.getString("tipo"));
             mod.setValor(conex.rs.getDouble("valor"));
-            mod.setEstoque(conex.rs.getInt("estoque")); 
+            mod.setEstoque(conex.rs.getInt("estoque"));
+            mod.setMarca(conex.rs.getString("marca"));
             
         } catch (SQLException ex) {
             

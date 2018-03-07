@@ -20,7 +20,10 @@ public class beansFuncionarios {
     private int ramal;
     private String nomecompleto;
     private String tipoPesquisa;
-
+    private String email;
+    private String rua;
+    private String bairro;
+    private long cpf;
     /**
      * @return the id
      */
@@ -126,6 +129,67 @@ public class beansFuncionarios {
     public void setTipoPesquisa(String tipoPesquisa) {
         this.tipoPesquisa = tipoPesquisa;
     }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the rua
+     */
+    public String getRua() {
+        return rua;
+    }
+
+    /**
+     * @param rua the rua to set
+     */
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public long getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
+
+    /**
+     * @return the cpf
+     */
+
 
     
     

@@ -17,6 +17,7 @@ public class beansProdutos {
     private double valor;
     private String pesquisa;
     private String tipoPesquisa;
+    private String marca;
     
 
     /**
@@ -115,6 +116,20 @@ public class beansProdutos {
      */
     public void setTipoPesquisa(String tipoPesquisa) {
         this.tipoPesquisa = tipoPesquisa;
+    }
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
     
     
