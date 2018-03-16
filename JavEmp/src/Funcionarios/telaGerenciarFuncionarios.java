@@ -41,7 +41,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
                          
                          
                          
-                    Thread.sleep(15000);
+                    Thread.sleep(20000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
       }

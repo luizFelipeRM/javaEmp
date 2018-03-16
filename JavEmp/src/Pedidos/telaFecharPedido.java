@@ -36,7 +36,7 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
                             preencherTabelaPedidos("select *from compra where nome like'%" + mod.getPesquisa()+ "%'");
                       }                                                           
         
-            Thread.sleep(15000);
+            Thread.sleep(20000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
       }

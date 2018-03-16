@@ -13,6 +13,7 @@ import estatisticas.beansEstatisticaPedidos;
 import estatisticas.daoEstatisticaPesquisa;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +38,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     DefaultListModel MODELO;
     int Enter = 0;
     int estoque;
+    double valorTotal;
     
     //transformei as variaveis em arrays p criar 1 tabela e não só 1 coluna da tabela
     int idProduto;
@@ -51,31 +53,29 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     public void atualizarTabela() {
              while (true) {
                 try {
-                 modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-                 modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-                 controlProdutos.buscar(modProdutos);
-                        if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
-                        if(jTextFieldPesquisarProduto.getText().equals("")){
-                    preencherTabelaProdutos("select *from produtos order by nome");
                     
+                    
+                    modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                    modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    controlProdutos.buscar(modProdutos);
+                    
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                            preencherTabelaProdutos("select *from produtos order by nome");
                         }else{
-                            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-                            controlProdutos.buscar(modProdutos);
-                            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
-                      }                        
+                            mod.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            
+                        }
                 }else{
-                      modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-                      modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-                      controlProdutos.buscar(modProdutos);                      
-                      preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'"+"and tipo like'"+modProdutos.getTipoPesquisa()+"'");
-                      
-        }       
+            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }
                     
                     
                     
                     
    
-                    Thread.sleep(15000);
+                    Thread.sleep(20000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
          }
@@ -125,8 +125,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldValorAtual = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldSaldo = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -137,6 +135,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jTextFieldQuantidade = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setTitle("Tirar Pedido");
@@ -202,6 +201,11 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
         jComboBoxTipodoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipodoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
+        jComboBoxTipodoProduto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipodoProdutoItemStateChanged(evt);
+            }
+        });
         jComboBoxTipodoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipodoProdutoActionPerformed(evt);
@@ -270,30 +274,19 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Valor Atual");
         jLayeredPane1.add(jLabel5);
-        jLabel5.setBounds(1140, 0, 130, 22);
+        jLabel5.setBounds(1080, 0, 130, 22);
 
         jTextFieldValorAtual.setEditable(false);
         jTextFieldValorAtual.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldValorAtual.setText("0.0");
         jTextFieldValorAtual.setEnabled(false);
-        jLayeredPane1.add(jTextFieldValorAtual);
-        jTextFieldValorAtual.setBounds(1070, 20, 270, 30);
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setText("Saldo do Cliente");
-        jLayeredPane1.add(jLabel3);
-        jLabel3.setBounds(810, 0, 190, 22);
-
-        jTextFieldSaldo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldSaldo.setText("R$00,00");
-        jTextFieldSaldo.setEnabled(false);
-        jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldValorAtual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSaldoActionPerformed(evt);
+                jTextFieldValorAtualActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jTextFieldSaldo);
-        jTextFieldSaldo.setBounds(740, 20, 290, 30);
+        jLayeredPane1.add(jTextFieldValorAtual);
+        jTextFieldValorAtual.setBounds(1000, 20, 270, 30);
 
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("                                                 Finalizar Pedido");
@@ -336,7 +329,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
-        jLabelNomeCliente.setBounds(460, 20, 180, 20);
+        jLabelNomeCliente.setBounds(590, 30, 180, 20);
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setText("Adicionar ao Carrinho");
@@ -401,20 +394,32 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLayeredPane1.add(jCheckBox1);
         jCheckBox1.setBounds(20, 90, 190, 30);
 
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jFormattedTextField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLayeredPane1.add(jFormattedTextField1);
+        jFormattedTextField1.setBounds(770, 20, 190, 30);
+
         getContentPane().add(jLayeredPane1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/* 
-    public String PegarProdutos(){
-        String produtos;
-         for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
-          //Salvar no banco de dados o nome e o valor
-          // valorTotal  += Double.parseDouble(jTable_Carrinho.getValueAt(i, 2).toString());
-      }
-         return valorTotal.toString();
-    }  
-    */
+ 
+    
+    public String DecimalFinalizar(){
+        DecimalFormat deci = new DecimalFormat("0.00");
+        double valor = Double.parseDouble(jTextFieldValorAtual.getText());
+        return deci.format(valor);
+    }
+    
+    public String Decimalizar(String valor){
+        DecimalFormat deci = new DecimalFormat("0.00");
+        double valor1 = Double.parseDouble(valor);
+        return deci.format(valor1);
+    }
+    
+    
+    
+    
     
     
     public boolean checarAdicionar(String produto){
@@ -488,7 +493,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         try {
             conex.conectar();
         conex.rs.first();
-        jTextFieldSaldo.setText(conex.rs.getString("credito"));
         jLabelNomeCliente.setText(conex.rs.getString("nome"));
             jCheckBox1.setVisible(true);
         
@@ -503,7 +507,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     
     
     private String CalculaTotal(){
-        Double valorTotal = 0.0;
+        Double valorTotal = 0.00;
          for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
            valorTotal  += Double.parseDouble(jTable_Carrinho.getValueAt(i, 2).toString());
       }
@@ -557,8 +561,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     
     public void voltarPadrao(){
         jLabelNomeCliente.setText("Nome do Cliente");
-        jTextFieldSaldo.setText("R$00,00");
-        jTextFieldValorAtual.setText("0.0");
+        jTextFieldValorAtual.setText("0.00");
         jTextFieldPesquisarProduto.setText("");
         jTextFieldNome.setText("");
         jComboBoxTipodoProduto.setSelectedItem("Todos");
@@ -641,31 +644,27 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
        }
     
     private void jTextFieldPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarProdutoActionPerformed
-            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-            modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-            controlProdutos.buscar(modProdutos);
-                        if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
-                        if(jTextFieldPesquisarProduto.getText().equals("")){
-                    preencherTabelaProdutos("select *from produtos order by nome");
+                    modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                    modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    controlProdutos.buscar(modProdutos);
                     
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                            preencherTabelaProdutos("select *from produtos order by nome");
                         }else{
-                            modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-                            controlProdutos.buscar(modProdutos);
-                            preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'");
-                      }                        
+                            mod.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            
+                        }
                 }else{
-                      modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
-                      modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-                      controlProdutos.buscar(modProdutos);                      
-                      preencherTabelaProdutos("select *from produtos where nome like'%" + modProdutos.getPesquisa()+ "%'"+"and tipo like'"+modProdutos.getTipoPesquisa()+"'");
-                      
-        }       
+            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }
     }//GEN-LAST:event_jTextFieldPesquisarProdutoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         int resposta = 0;
-        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja Finalizar o pedido?");
+        resposta = JOptionPane.showConfirmDialog(null, "Deseja Finalizar o pedido\nde Valor R$:"+jTextFieldValorAtual.getText()+"?");
         if(resposta ==JOptionPane.YES_OPTION){
            
          double valorAtual = Double.parseDouble(CalculaTotal());
@@ -673,8 +672,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             if(valorAtual != 0.0 ){
               if(jCheckBox1.isSelected()){
                   Salvar();
-                                  
-                   JOptionPane.showMessageDialog(null, "Pedido concluido"); 
+                    DiminuirEstoque();              
                     voltarPadrao();
                     limparTabela();
               }else{
@@ -707,6 +705,30 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Favor selecionar cliente antes de finalizar o pedido");
                 }
               }
+              
+
+              
+                    modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                    modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    controlProdutos.buscar(modProdutos);
+                    
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                            preencherTabelaProdutos("select *from produtos order by nome");
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            
+                        }
+                }else{
+            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }
+              
+              
+              
+              
+              
+              
       }else{
                 JOptionPane.showMessageDialog(null, "Favor adicionar um ou mais produtos à tabela antes de finalizar o pedido");
             }
@@ -755,7 +777,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 tableModel.setQuantidade(jTable_Carrinho.getSelectedRow(), quantidade);
          
                 //valorProduto = valorProduto * quantidadeProduto;
-                jTextFieldValorAtual.setText(CalculaTotal());
+                jTextFieldValorAtual.setText(Decimalizar(CalculaTotal()));
                 jTable_Carrinho.clearSelection();
                 jTableProdutos.clearSelection();
 
@@ -784,16 +806,12 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 tableModel.removeRow(jTable_Carrinho.getSelectedRow());
                 jTable_Carrinho.clearSelection();
                 jTableProdutos.clearSelection();
-                jTextFieldValorAtual.setText(CalculaTotal());            
+                jTextFieldValorAtual.setText((Decimalizar(CalculaTotal())));            
             }
         }else{
             JOptionPane.showMessageDialog(null, "Escolha o item que deseja remover da compra");
         }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
-
-    private void jTextFieldSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaldoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldSaldoActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -834,7 +852,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         try {
 
             conex.rs.first(); 
-            jTextFieldSaldo.setText(conex.rs.getString("credito"));
             jLabelNomeCliente.setText(conex.rs.getString("nome"));
             jScrollPane1.setVisible(false);
 
@@ -888,13 +905,36 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                     }
                 
             }
-            jTextFieldValorAtual.setText(CalculaTotal());
+            jTextFieldValorAtual.setText((Decimalizar(CalculaTotal())));
             jTableProdutos.clearSelection();
             jTable_Carrinho.clearSelection();
             jTextFieldQuantidade.setText("Única");
         }else{
               JOptionPane.showMessageDialog(null, "Produto já adicionado, favor editar sua quantidade ");
           }
+          
+          
+          
+                    modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                    modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    controlProdutos.buscar(modProdutos);
+                    
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                            preencherTabelaProdutos("select *from produtos order by nome");
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            
+                        }
+                }else{
+            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }
+          
+          
+          
+          
+          
       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -937,6 +977,34 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jTextFieldValorAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorAtualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldValorAtualActionPerformed
+
+    private void jComboBoxTipodoProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipodoProdutoItemStateChanged
+        // TODO add your handling code here:
+                    modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
+                    modProdutos.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    controlProdutos.buscar(modProdutos);
+                    
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                        if(jTextFieldPesquisarProduto.getText().equals("")){
+                            preencherTabelaProdutos("select *from produtos order by nome");
+                        }else{
+                            mod.setPesquisa(jTextFieldPesquisarProduto.getText());
+                            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            
+                        }
+                }else{
+            preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+        }        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jComboBoxTipodoProdutoItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
@@ -945,10 +1013,10 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBoxTipodoProduto;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -965,7 +1033,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesquisarProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
-    private javax.swing.JTextField jTextFieldSaldo;
     private javax.swing.JTextField jTextFieldValorAtual;
     // End of variables declaration//GEN-END:variables
 }

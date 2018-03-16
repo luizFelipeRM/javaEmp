@@ -33,7 +33,6 @@ public class daoProdutos {
 
             
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir dados /n"+ex);
         }
@@ -48,7 +47,6 @@ public class daoProdutos {
             PreparedStatement pst = conex.con.prepareStatement("delete from produtos where id=?");
             pst.setInt(1, mod.getId());
             pst.execute();
-             JOptionPane.showMessageDialog(null, "Dados excluidos com sucessos");
             
         } catch (SQLException ex) {
             Logger.getLogger(daoFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +85,6 @@ public class daoProdutos {
             pst.setInt      (2, mod.getId());
             
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Dados alterados com sucessos");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro na alteração dos dados /nErro:"+ex );
         }

@@ -55,7 +55,7 @@ public class telaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonLogin);
-        jButtonLogin.setBounds(10, 120, 359, 46);
+        jButtonLogin.setBounds(10, 100, 359, 46);
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Usuário");
@@ -70,7 +70,7 @@ public class telaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldNome);
-        jTextFieldNome.setBounds(10, 50, 359, 34);
+        jTextFieldNome.setBounds(10, 40, 359, 34);
 
         jPasswordFieldSenha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jPasswordFieldSenha.setText("senha");
@@ -90,12 +90,12 @@ public class telaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordFieldSenha);
-        jPasswordFieldSenha.setBounds(10, 80, 260, 32);
+        jPasswordFieldSenha.setBounds(10, 70, 260, 32);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel4.setText("Fenix");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(135, 0, 124, 59);
+        jLabel4.setBounds(140, -10, 124, 59);
 
         jCheckBox1.setText("Ver Senha");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -104,9 +104,9 @@ public class telaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(280, 90, 100, 23);
+        jCheckBox1.setBounds(270, 80, 100, 23);
 
-        setSize(new java.awt.Dimension(393, 213));
+        setSize(new java.awt.Dimension(393, 185));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

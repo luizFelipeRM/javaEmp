@@ -49,7 +49,7 @@ public class ConnectMYSQL {
            stm = con.createStatement(rs.TYPE_SCROLL_INSENSITIVE,rs.CONCUR_READ_ONLY);
            rs =  stm.executeQuery(sql);
        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao executaSql " + ex.getMessage());
+          // JOptionPane.showMessageDialog(null, "Erro ao executaSql " + ex.getMessage());
        }
     
         

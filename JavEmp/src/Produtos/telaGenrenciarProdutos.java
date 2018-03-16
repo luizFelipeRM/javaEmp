@@ -32,24 +32,24 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
              public void atualizarTabela() {
              while (true) {                 
                 try {
+                   
                     
-                    if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
+                    mod.setPesquisa(jTextFieldPesquisa.getText());
+                    mod.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
+                    control.buscar(mod);
+                    populaComboBox();
+                     if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
                         if(jTextFieldPesquisa.getText().equals("")){
-                    preencherTabela("select *from produtos order by nome");
-                    
+                            preencherTabela("select *from produtos order by nome");
                         }else{
                             mod.setPesquisa(jTextFieldPesquisa.getText());
-                            control.buscar(mod);
                             preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
-                      }                        
+                            
+                        }
                 }else{
-                      mod.setPesquisa(jTextFieldPesquisa.getText());
-                      mod.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
-                      control.buscar(mod);                      
-                      preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
-                      
+            preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
         }
-            Thread.sleep(15000);
+            Thread.sleep(20000);
              } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
       }
@@ -65,6 +65,8 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
             atualizarTabela();
             }
         }).start();   
+        
+        populaComboBox();
     }
 
     /**
@@ -139,6 +141,11 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jTextFieldPreço.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldPreçoMouseClicked(evt);
+            }
+        });
+        jTextFieldPreço.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPreçoActionPerformed(evt);
             }
         });
         jTextFieldPreço.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -254,13 +261,34 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jLabel2.setBounds(390, 70, 70, 22);
 
         jComboBoxMarca.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amanco", "Tigre", " " }));
+        jComboBoxMarca.setEnabled(false);
+        jComboBoxMarca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxMarcaMouseClicked(evt);
+            }
+        });
+        jComboBoxMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMarcaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBoxMarca);
         jComboBoxMarca.setBounds(470, 60, 280, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populaComboBox(){
+     try{   
+        conex.executaSql("select *from marca order by nome");
+        while(conex.rs.next()){
+            jComboBoxMarca.addItem(conex.rs.getString("nome"));
+        }
+    }catch(SQLException ex){
+        
+    }
+  }
+    
     public void Liberar(){
         
         jTextFieldNomedoProduto.setEnabled(true);
@@ -291,8 +319,14 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         flag = 1;
         Liberar();
+        jTextFieldNomedoProduto.setText("Nome do Produto");
+        jTextFieldPreço.setText("R$ 00,00");
+        jTextFieldQuantidade.setText("Quantidade");
+        
+        jButtonDeletar.setEnabled(false);
         jButtonNovo.setEnabled(false);
         jButtonEnviar.setEnabled(true);
+        populaComboBox();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
@@ -305,17 +339,20 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
             if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
                         if(jTextFieldPesquisa.getText().equals("")){
                     preencherTabela("select *from produtos order by nome");
+                    populaComboBox();
                     
                         }else{
                             mod.setPesquisa(jTextFieldPesquisa.getText());
                             control.buscar(mod);
                             preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            populaComboBox();
                       }                        
                 }else{
                       mod.setPesquisa(jTextFieldPesquisa.getText());
                       mod.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
                       control.buscar(mod);                      
                       preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+                      populaComboBox();
                       
         }
             BloquearEscrever();
@@ -329,23 +366,32 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
             mod.setNome(jTextFieldNomedoProduto.getText());
             mod.setTipo((String) jComboBoxTipo.getSelectedItem());
             mod.setValor(Double.parseDouble(jTextFieldPreço.getText()));
+            
+            if(jTextFieldQuantidade.getText().equals("Quantidade") || jTextFieldQuantidade.getText().equals("")){
+                 mod.setEstoque(1);
+            }else{                        
             mod.setEstoque(Integer.parseInt(jTextFieldQuantidade.getText()));
+            }
+            
             mod.setMarca((String) jComboBoxMarca.getSelectedItem());
             control.Salvar(mod);
              if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
                         if(jTextFieldPesquisa.getText().equals("")){
                     preencherTabela("select *from produtos order by nome");
+                    populaComboBox();
                     
                         }else{
                             mod.setPesquisa(jTextFieldPesquisa.getText());
                             control.buscar(mod);
                             preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'");
+                            populaComboBox();
                       }                        
                 }else{
                       mod.setPesquisa(jTextFieldPesquisa.getText());
                       mod.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
                       control.buscar(mod);                      
                       preencherTabela("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
+                      populaComboBox();
                       
         }
             BloquearEscrever();
@@ -381,13 +427,14 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     private void jTableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosMouseClicked
+
         // TODO add your handling code here:
         String nome =""+jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 1);
         conex.conectar();
         conex.executaSql("select *from produtos where nome='"+nome+"'");
         try {
             flag = 2;
-            jButtonNovo.setEnabled(false);
+            jButtonNovo.setEnabled(true);
             jButtonEnviar.setEnabled(true);
             jButtonDeletar.setEnabled(true);
             Liberar();
@@ -395,6 +442,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
             jTextField.setText(String.valueOf(conex.rs.getInt("id")));
             jTextFieldNomedoProduto.setText(conex.rs.getString("nome"));
             jComboBoxTipo.setSelectedItem(conex.rs.getString("tipo"));
+            jComboBoxMarca.setSelectedItem(conex.rs.getString("marca"));
             jTextFieldPreço.setText(conex.rs.getString("valor"));
             jTextFieldQuantidade.setText(conex.rs.getString("estoque"));
 
@@ -457,6 +505,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         mod.setPesquisa(jTextFieldPesquisa.getText());
         mod.setTipoPesquisa((String) jComboBoxTipodoProduto.getSelectedItem());
         control.buscar(mod);
+        populaComboBox();
          if(jComboBoxTipodoProduto.getSelectedItem() == "Todos"){
                         if(jTextFieldPesquisa.getText().equals("")){
                     preencherTabela("select *from produtos order by nome");
@@ -488,6 +537,19 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jComboBoxTipodoProdutoItemStateChanged
 
+    private void jTextFieldPreçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPreçoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPreçoActionPerformed
+
+    private void jComboBoxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxMarcaActionPerformed
+
+    private void jComboBoxMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMarcaMouseClicked
+        // TODO add your handling code here:
+        populaComboBox();
+    }//GEN-LAST:event_jComboBoxMarcaMouseClicked
+
 public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
           String [] colunas = new String []{"ID","Nome","Tipo","Marca","Valor","Estoque"};
@@ -506,7 +568,7 @@ public void preencherTabela(String Sql){
           jTableProdutos.setModel(modelo);
           jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(70);
           jTableProdutos.getColumnModel().getColumn(0).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(248);
+          jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(298);
           jTableProdutos.getColumnModel().getColumn(1).setResizable(false);
           jTableProdutos.getColumnModel().getColumn(2).setPreferredWidth(248);
           jTableProdutos.getColumnModel().getColumn(2).setResizable(false);
@@ -514,7 +576,7 @@ public void preencherTabela(String Sql){
           jTableProdutos.getColumnModel().getColumn(3).setResizable(false);
           jTableProdutos.getColumnModel().getColumn(4).setPreferredWidth(248);
           jTableProdutos.getColumnModel().getColumn(4).setResizable(false);
-          jTableProdutos.getColumnModel().getColumn(5).setPreferredWidth(248);
+          jTableProdutos.getColumnModel().getColumn(5).setPreferredWidth(212);            
           jTableProdutos.getColumnModel().getColumn(5).setResizable(false);
           jTableProdutos.getTableHeader().setReorderingAllowed(false);
           jTableProdutos.setAutoResizeMode(jTableProdutos.AUTO_RESIZE_OFF);
