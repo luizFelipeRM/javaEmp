@@ -91,6 +91,7 @@ public class frameMarca extends javax.swing.JFrame {
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Nome da Marca");
+        jTextFieldNome.setToolTipText("Nome da Marca");
         jTextFieldNome.setEnabled(false);
         jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -157,6 +158,7 @@ public class frameMarca extends javax.swing.JFrame {
         jTextFieldId.setEnabled(false);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisar.setToolTipText("Pesquisa");
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);

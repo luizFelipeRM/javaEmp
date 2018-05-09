@@ -129,6 +129,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nome da Marca"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nome da Marca"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -207,6 +208,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Pesquisa"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPesquisarActionPerformed"/>

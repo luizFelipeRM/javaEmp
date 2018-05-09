@@ -83,6 +83,7 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTablePedidos);
 
+        jTextFieldPesquisar.setToolTipText("Pesquisa");
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);
@@ -121,7 +122,7 @@ public class telaFecharPedido extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldPesquisar)
-                    .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                    .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

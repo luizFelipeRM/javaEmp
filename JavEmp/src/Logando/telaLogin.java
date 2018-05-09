@@ -59,6 +59,7 @@ public class telaLogin extends javax.swing.JFrame {
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Usuário");
+        jTextFieldNome.setToolTipText("Usuário");
         jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldNomeMouseClicked(evt);
@@ -74,6 +75,7 @@ public class telaLogin extends javax.swing.JFrame {
 
         jPasswordFieldSenha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jPasswordFieldSenha.setText("senha");
+        jPasswordFieldSenha.setToolTipText("Senha");
         jPasswordFieldSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPasswordFieldSenhaMouseClicked(evt);
@@ -104,7 +106,7 @@ public class telaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(270, 80, 100, 23);
+        jCheckBox1.setBounds(270, 80, 100, 24);
 
         setSize(new java.awt.Dimension(393, 185));
         setLocationRelativeTo(null);

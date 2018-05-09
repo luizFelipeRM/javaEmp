@@ -115,6 +115,7 @@ public class telaEstoque extends javax.swing.JInternalFrame{
         jButton1.setBounds(10, 0, 1330, 80);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisar.setToolTipText("Pesquisa");
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);
@@ -125,13 +126,14 @@ public class telaEstoque extends javax.swing.JInternalFrame{
 
         jComboBoxTipoDoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipoDoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
+        jComboBoxTipoDoProduto.setToolTipText("Tipo da Pesquisa");
         jComboBoxTipoDoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoDoProdutoActionPerformed(evt);
             }
         });
         getContentPane().add(jComboBoxTipoDoProduto);
-        jComboBoxTipoDoProduto.setBounds(1030, 80, 310, 31);
+        jComboBoxTipoDoProduto.setBounds(1030, 80, 310, 34);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

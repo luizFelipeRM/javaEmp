@@ -11,6 +11,7 @@ import Produtos.beansProdutos;
 import Produtos.daoProdutos;
 import estatisticas.beansEstatisticaPedidos;
 import estatisticas.daoEstatisticaPesquisa;
+import imprimir.imprimir;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -135,7 +136,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jTextFieldQuantidade = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setTitle("Tirar Pedido");
@@ -166,7 +166,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Nome do Produto");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(430, 30, 200, 22);
+        jLabel6.setBounds(430, 30, 200, 24);
 
         jTableProdutos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -191,6 +191,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jScrollPane2.setBounds(10, 100, 1310, 190);
 
         jTextFieldPesquisarProduto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisarProduto.setToolTipText("Pesquisa");
         jTextFieldPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarProdutoActionPerformed(evt);
@@ -201,6 +202,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
 
         jComboBoxTipodoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipodoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
+        jComboBoxTipodoProduto.setToolTipText("Tipo da Pesquisa");
         jComboBoxTipodoProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxTipodoProdutoItemStateChanged(evt);
@@ -217,7 +219,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setText("Tipo");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(1120, 30, 60, 22);
+        jLabel7.setBounds(1120, 30, 60, 24);
 
         jFormattedTextFieldQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jFormattedTextFieldQuantidade.setText("Única");
@@ -237,11 +239,11 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(jFormattedTextFieldQuantidade);
-        jFormattedTextFieldQuantidade.setBounds(268, 591, 84, 19);
+        jFormattedTextFieldQuantidade.setBounds(268, 591, 84, 20);
 
         jLabel1.setText("Quantidade:");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(14, 588, 85, 15);
+        jLabel1.setBounds(14, 588, 68, 16);
 
         jLayeredPane1.add(jPanel2);
         jPanel2.setBounds(10, 238, 1330, 300);
@@ -269,12 +271,12 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Nome do Cliente");
         jLayeredPane1.add(jLabel2);
-        jLabel2.setBounds(34, 1, 170, 22);
+        jLabel2.setBounds(34, 1, 170, 24);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Valor Atual");
         jLayeredPane1.add(jLabel5);
-        jLabel5.setBounds(1080, 0, 130, 22);
+        jLabel5.setBounds(1080, 0, 130, 24);
 
         jTextFieldValorAtual.setEditable(false);
         jTextFieldValorAtual.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -329,7 +331,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
-        jLabelNomeCliente.setBounds(590, 30, 180, 20);
+        jLabelNomeCliente.setBounds(610, 30, 180, 20);
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setText("Adicionar ao Carrinho");
@@ -362,6 +364,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jTextFieldQuantidade.setBounds(130, 540, 220, 50);
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldNome.setToolTipText("Cliente");
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNomeActionPerformed(evt);
@@ -392,12 +395,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
             }
         });
         jLayeredPane1.add(jCheckBox1);
-        jCheckBox1.setBounds(20, 90, 190, 30);
-
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        jFormattedTextField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLayeredPane1.add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(770, 20, 190, 30);
+        jCheckBox1.setBounds(20, 90, 190, 28);
 
         getContentPane().add(jLayeredPane1);
 
@@ -691,6 +689,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                    //Salvando nas estatisticas
                     Salvar();
                     
+                    imprimir imprimir = new imprimir();
+                    imprimir.excelPedido(jTable_Carrinho, jLabelNomeCliente.getText());
                                 
                    JOptionPane.showMessageDialog(null, "Pedido concluido e enviado à tela de entregas");
                     
@@ -723,11 +723,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 }else{
             preencherTabelaProdutos("select *from produtos where nome like'%" + mod.getPesquisa()+ "%'"+"and tipo like'"+mod.getTipoPesquisa()+"'");
         }
-              
-              
-              
-              
-              
+ 
               
       }else{
                 JOptionPane.showMessageDialog(null, "Favor adicionar um ou mais produtos à tabela antes de finalizar o pedido");
@@ -1013,7 +1009,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBoxTipodoProduto;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

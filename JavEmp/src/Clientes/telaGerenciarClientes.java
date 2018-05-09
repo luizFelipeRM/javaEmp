@@ -160,6 +160,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         jScrollPane1.setBounds(10, 160, 1340, 490);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisar.setToolTipText("Pesquisa");
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);
@@ -175,6 +176,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Nome do Cliente");
+        jTextFieldNome.setToolTipText("Nome do Cliente");
         jTextFieldNome.setEnabled(false);
         jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -222,6 +224,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
 
         jTextFieldRua.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldRua.setText("Rua do Cliente");
+        jTextFieldRua.setToolTipText("Rua do Cliente");
         jTextFieldRua.setEnabled(false);
         jTextFieldRua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -238,12 +241,14 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
 
         jComboBoxBairros.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxBairros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abolição", "Acari", "Água Santa", "Alto da Boa Vista", "Anchieta", "Andaraí", "Anil", "Araújo Cosmos", "Baía Guanabara", "Bancários", "Bangu", "Barra da Tijuca", "Barra de Guaratiba", "Barra Guaratiba", "Barros Filho", "Benfica", "Bento Ribeiro", "Bonsucesso", "Botafogo", "Braz de Pina", "Braz Pina", "Cachambi", "Cacuia", "Caju", "Camorim", "Campinho", "Campo dos Afonsos", "Campo Grande", "Cascadura", "Catete", "Catumbi", "Cavalcanti", "Centro", "Cidade de Deus", "Cidade Deus", "Cidade Nova", "Cidade Universitária", "Cocota", "Coelho Neto", "Colégio", "Copacabana", "Cordovil", "Cosme Velho", "Cosmos", "Costa Barros", "Curicica", "Curral Falso", "Delegado Castilho", "Dendê", "Deodoro", "Dumas", "Encantado", "Engenheiro Leal", "Engenho da Rainha", "Engenho de Dentro", "Engenho Novo", "Estácio", "Flamengo", "Freguesia", "Freguesia - Ilha Governador", "Freguesia - Jacarepaguá", "Galeão", "Gamboa", "Gardênia Azul", "Gávea", "Glória", "Grajaú", "Guadalupe", "Guarabu", "Guaratiba", "Higienópolis", "Honório Gurgel", "Humaitá", "Inhaúma", "Inhoaíba", "Ipanema", "Irajá", "Itacolomi", "Itanhangá", "Jacaré", "Jacarepaguá", "Jardim América", "Jardim Botânico", "Jardim Carioca", "Jardim Guanabara", "Jardim Sulacap", "Joa", "Lagoa", "Laranjeiras", "Leblon", "Leme", "Lins de Vasconcelos", "Lins Vasconcelos", "Loteamento Madean", "Madureira", "Magalhães Bastos", "Mangueira", "Manguinhos", "Maracanã", "Mare", "Marechal Hermes", "Maria da Graça", "Meier", "Moneró", "Nossa Senhora das Graças", "Nossa Senhora Graças", "Olaria", "Oswaldo Cruz", "Paciência", "Padre Miguel", "Paquetá", "Parada de Lucas", "Parada Lucas", "Parque Anchieta", "Parque Boa Esperança", "Pavuna", "Pechincha", "Pedra de Guaratiba", "Pedra Guaratiba", "Penha", "Penha Circular", "Piedade", "Pilares", "Pitangueiras", "Portuguesa", "Praça Bandeira", "Praça Seca", "Praia Bandeira", "Quintino Bocaiuva", "Ramos", "Realengo", "Recreio Bandeirantes", "Recreio dos Bandeirantes", "Riachuelo", "Ribeira", "Ricardo de Albuquerque", "Rio Comprido", "Rocha", "Rocha Miranda", "Rocinha", "Sampaio", "Santa Cruz", "Santa Teresa", "Santa Tereza", "Santíssimo", "Santo Cristo", "São Conrado", "São Cristóvão", "São Francisco Xavier", "Saúde", "Senador Camará", "Senador Vasconcelos", "Sepetiba", "Tanque", "Taquara", "Tauá", "Tijuca", "Todos Os Santos", "Tomás Coelho", "Tubiacanga", "Turiaçu", "Urca", "Vargem Grande", "Vargem Pequena", "Vaz Lobo", "Vicente de Carvalho", "Vidigal", "Vigário Geral", "Vila da Penha", "Vila Isabel", "Vila Kosmos", "Vila Militar", "Vila Penha", "Vila Valqueire", "Vista Alegre", "Zumbi" }));
+        jComboBoxBairros.setToolTipText("Bairro");
         jComboBoxBairros.setEnabled(false);
         getContentPane().add(jComboBoxBairros);
         jComboBoxBairros.setBounds(420, 60, 280, 40);
 
         jTextFieldComplemento.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldComplemento.setText("Numero e Complemento");
+        jTextFieldComplemento.setToolTipText("Numero e Complemento");
         jTextFieldComplemento.setEnabled(false);
         jTextFieldComplemento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

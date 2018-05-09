@@ -165,6 +165,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jComboBox.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
+        jComboBox.setToolTipText("Cargo");
         jComboBox.setEnabled(false);
         jComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +199,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jTextFieldSenha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldSenha.setText("Senha");
+        jTextFieldSenha.setToolTipText("Senha");
         jTextFieldSenha.setEnabled(false);
         jTextFieldSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -214,6 +216,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNome.setText("Usuário");
+        jTextFieldNome.setToolTipText("Usuário");
         jTextFieldNome.setEnabled(false);
         jTextFieldNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -235,6 +238,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jTextFieldSenha2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldSenha2.setText("Confirmar Senha");
+        jTextFieldSenha2.setToolTipText("Confirmar Senha");
         jTextFieldSenha2.setEnabled(false);
         jTextFieldSenha2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -250,6 +254,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         jTextFieldSenha2.setBounds(780, 60, 530, 40);
 
         jTextFieldPesquisar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisar.setToolTipText("Pesquisa");
         jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisarActionPerformed(evt);
@@ -267,7 +272,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButtonSalvar);
-        jButtonSalvar.setBounds(600, 160, 360, 32);
+        jButtonSalvar.setBounds(600, 160, 360, 40);
 
         jButtonDeletar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonDeletar.setText("Deletar");
@@ -278,7 +283,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButtonDeletar);
-        jButtonDeletar.setBounds(310, 160, 280, 32);
+        jButtonDeletar.setBounds(310, 160, 280, 40);
 
         jTextFieldId.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldId.setEnabled(false);
@@ -294,10 +299,11 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButtonEditar);
-        jButtonEditar.setBounds(970, 160, 340, 32);
+        jButtonEditar.setBounds(970, 160, 340, 40);
 
         jTextField_NomeCompleto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextField_NomeCompleto.setText("Nome Completo");
+        jTextField_NomeCompleto.setToolTipText("Nome Completo");
         jTextField_NomeCompleto.setEnabled(false);
         jTextField_NomeCompleto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -314,6 +320,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
+        jComboBox1.setToolTipText("Tipo de Busca");
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -341,7 +348,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Telefone:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(370, 20, 100, 22);
+        jLabel1.setBounds(370, 20, 100, 24);
 
         jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonNovo.setText("Novo");
@@ -351,7 +358,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButtonNovo);
-        jButtonNovo.setBounds(10, 160, 290, 32);
+        jButtonNovo.setBounds(10, 160, 290, 40);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("CPF:");
@@ -360,6 +367,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jTextFieldEmail.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldEmail.setText("Email");
+        jTextFieldEmail.setToolTipText("Email");
         jTextFieldEmail.setEnabled(false);
         jTextFieldEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -381,6 +389,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jTextFieldRua.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldRua.setText("Rua do Funcionário");
+        jTextFieldRua.setToolTipText("Rua do Funcionário");
         jTextFieldRua.setEnabled(false);
         jTextFieldRua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -397,6 +406,7 @@ public class telaGerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jComboBoxBairros.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxBairros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abolição", "Acari", "Água Santa", "Alto da Boa Vista", "Anchieta", "Andaraí", "Anil", "Araújo Cosmos", "Baía Guanabara", "Bancários", "Bangu", "Barra da Tijuca", "Barra de Guaratiba", "Barra Guaratiba", "Barros Filho", "Benfica", "Bento Ribeiro", "Bonsucesso", "Botafogo", "Braz de Pina", "Braz Pina", "Cachambi", "Cacuia", "Caju", "Camorim", "Campinho", "Campo dos Afonsos", "Campo Grande", "Cascadura", "Catete", "Catumbi", "Cavalcanti", "Centro", "Cidade de Deus", "Cidade Deus", "Cidade Nova", "Cidade Universitária", "Cocota", "Coelho Neto", "Colégio", "Copacabana", "Cordovil", "Cosme Velho", "Cosmos", "Costa Barros", "Curicica", "Curral Falso", "Delegado Castilho", "Dendê", "Deodoro", "Dumas", "Encantado", "Engenheiro Leal", "Engenho da Rainha", "Engenho de Dentro", "Engenho Novo", "Estácio", "Flamengo", "Freguesia", "Freguesia - Ilha Governador", "Freguesia - Jacarepaguá", "Galeão", "Gamboa", "Gardênia Azul", "Gávea", "Glória", "Grajaú", "Guadalupe", "Guarabu", "Guaratiba", "Higienópolis", "Honório Gurgel", "Humaitá", "Inhaúma", "Inhoaíba", "Ipanema", "Irajá", "Itacolomi", "Itanhangá", "Jacaré", "Jacarepaguá", "Jardim América", "Jardim Botânico", "Jardim Carioca", "Jardim Guanabara", "Jardim Sulacap", "Joa", "Lagoa", "Laranjeiras", "Leblon", "Leme", "Lins de Vasconcelos", "Lins Vasconcelos", "Loteamento Madean", "Madureira", "Magalhães Bastos", "Mangueira", "Manguinhos", "Maracanã", "Mare", "Marechal Hermes", "Maria da Graça", "Meier", "Moneró", "Nossa Senhora das Graças", "Nossa Senhora Graças", "Olaria", "Oswaldo Cruz", "Paciência", "Padre Miguel", "Paquetá", "Parada de Lucas", "Parada Lucas", "Parque Anchieta", "Parque Boa Esperança", "Pavuna", "Pechincha", "Pedra de Guaratiba", "Pedra Guaratiba", "Penha", "Penha Circular", "Piedade", "Pilares", "Pitangueiras", "Portuguesa", "Praça Bandeira", "Praça Seca", "Praia Bandeira", "Quintino Bocaiuva", "Ramos", "Realengo", "Recreio Bandeirantes", "Recreio dos Bandeirantes", "Riachuelo", "Ribeira", "Ricardo de Albuquerque", "Rio Comprido", "Rocha", "Rocha Miranda", "Rocinha", "Sampaio", "Santa Cruz", "Santa Teresa", "Santa Tereza", "Santíssimo", "Santo Cristo", "São Conrado", "São Cristóvão", "São Francisco Xavier", "Saúde", "Senador Camará", "Senador Vasconcelos", "Sepetiba", "Tanque", "Taquara", "Tauá", "Tijuca", "Todos Os Santos", "Tomás Coelho", "Tubiacanga", "Turiaçu", "Urca", "Vargem Grande", "Vargem Pequena", "Vaz Lobo", "Vicente de Carvalho", "Vidigal", "Vigário Geral", "Vila da Penha", "Vila Isabel", "Vila Kosmos", "Vila Militar", "Vila Penha", "Vila Valqueire", "Vista Alegre", "Zumbi" }));
+        jComboBoxBairros.setToolTipText("Bairro");
         jComboBoxBairros.setEnabled(false);
         jPanel1.add(jComboBoxBairros);
         jComboBoxBairros.setBounds(750, 110, 260, 40);

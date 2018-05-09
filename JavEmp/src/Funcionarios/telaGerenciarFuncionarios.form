@@ -69,6 +69,7 @@
                 <StringItem index="1" value="Funcionario"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Cargo"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -116,6 +117,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Senha"/>
+            <Property name="toolTipText" type="java.lang.String" value="Senha"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -134,6 +136,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Usu&#xe1;rio"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -153,6 +156,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Confirmar Senha"/>
+            <Property name="toolTipText" type="java.lang.String" value="Confirmar Senha"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -170,6 +174,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Pesquisa"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPesquisarActionPerformed"/>
@@ -250,6 +255,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nome Completo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nome Completo"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -273,6 +279,7 @@
                 <StringItem index="1" value="Funcionario"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Tipo de Busca"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox1ItemStateChanged"/>
@@ -352,6 +359,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Email"/>
+            <Property name="toolTipText" type="java.lang.String" value="Email"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -371,6 +379,7 @@
               <Font name="Dialog" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Rua do Funcion&#xe1;rio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Rua do Funcion&#xe1;rio"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -568,6 +577,7 @@
                 <StringItem index="175" value="Zumbi"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Bairro"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>

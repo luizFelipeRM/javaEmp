@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
     import DB.ConnectMYSQL;
     import Funcionarios.modeloTabela;
+import imprimir.imprimir;
     import java.sql.SQLException;
     import java.util.ArrayList;
     import javax.swing.JOptionPane;
@@ -94,6 +95,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxMarca = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         getContentPane().setLayout(null);
@@ -105,6 +107,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
 
         jTextFieldNomedoProduto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldNomedoProduto.setText("Nome do Produto");
+        jTextFieldNomedoProduto.setToolTipText("Nome do Produto");
         jTextFieldNomedoProduto.setEnabled(false);
         jTextFieldNomedoProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -121,6 +124,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
 
         jTextFieldQuantidade.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldQuantidade.setText("Quantidade");
+        jTextFieldQuantidade.setToolTipText("Quantidade");
         jTextFieldQuantidade.setEnabled(false);
         jTextFieldQuantidade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,6 +141,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
 
         jTextFieldPreço.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldPreço.setText("R$ 00,00");
+        jTextFieldPreço.setToolTipText("Valor");
         jTextFieldPreço.setEnabled(false);
         jTextFieldPreço.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,7 +164,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jLabelTipo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelTipo.setText("Tipo:");
         getContentPane().add(jLabelTipo);
-        jLabelTipo.setBounds(10, 70, 70, 22);
+        jLabelTipo.setBounds(10, 70, 70, 24);
 
         jComboBoxTipo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
@@ -224,9 +229,10 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableProdutos);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 160, 1330, 500);
+        jScrollPane1.setBounds(10, 160, 1330, 430);
 
         jTextFieldPesquisa.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPesquisa.setToolTipText("Pesquisa");
         jTextFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisaActionPerformed(evt);
@@ -242,6 +248,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
 
         jComboBoxTipodoProduto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxTipodoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Hidráulicos", "Ferragens e Ferramentas", "Tubos", "Fabricantes", "Tintas e Abrasivos", "Ferramentas Manuais", "Material Elétrico" }));
+        jComboBoxTipodoProduto.setToolTipText("Tipo da Pesquisa");
         jComboBoxTipodoProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxTipodoProdutoItemStateChanged(evt);
@@ -258,7 +265,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Marca:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(390, 70, 70, 22);
+        jLabel2.setBounds(390, 70, 70, 24);
 
         jComboBoxMarca.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBoxMarca.setEnabled(false);
@@ -274,6 +281,15 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jComboBoxMarca);
         jComboBoxMarca.setBounds(470, 60, 280, 40);
+
+        jButton1.setText("Imprimir Tabela Produtos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(0, 590, 1330, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -550,6 +566,12 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         populaComboBox();
     }//GEN-LAST:event_jComboBoxMarcaMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        imprimir imprimir = new imprimir();
+        imprimir.excelTabela(jTableProdutos);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
           String [] colunas = new String []{"ID","Nome","Tipo","Marca","Valor","Estoque"};
@@ -584,6 +606,7 @@ public void preencherTabela(String Sql){
           conex.desconecta();
       }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDeletar;
     private javax.swing.JButton jButtonEnviar;
     private javax.swing.JButton jButtonNovo;
