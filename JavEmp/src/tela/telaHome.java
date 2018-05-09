@@ -18,6 +18,7 @@ import Pedidos.telaFecharPedido;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +64,8 @@ public class telaHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jLabelUsuario = new javax.swing.JLabel();
@@ -80,8 +83,15 @@ public class telaHome extends javax.swing.JFrame {
         jMenuItem_CriarUsuario = new javax.swing.JMenuItem();
         jMenuItemGerenciarProdutos = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuAbrirPasta = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu_Minimizar = new javax.swing.JMenu();
         jMenu_Fechar = new javax.swing.JMenu();
+
+        jMenuItem7.setText("jMenuItem7");
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,14 +104,14 @@ public class telaHome extends javax.swing.JFrame {
         });
 
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseReleased(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
             }
         });
 
@@ -117,8 +127,10 @@ public class telaHome extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelUsuario)
-                .addContainerGap(1299, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(1333, Short.MAX_VALUE))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +142,7 @@ public class telaHome extends javax.swing.JFrame {
         );
 
         getContentPane().add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 1360, 730);
+        jDesktopPane1.setBounds(0, 0, 1380, 730);
 
         jMenu1.setText("Arquivo");
         jMenu1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -238,6 +250,29 @@ public class telaHome extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAdmin);
 
+        jMenuAbrirPasta.setText("Abrir Pasta");
+        jMenuAbrirPasta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jMenuItem8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem8.setText("Tabela de Produtos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenuAbrirPasta.add(jMenuItem8);
+
+        jMenuItem10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem10.setText("Pedido");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenuAbrirPasta.add(jMenuItem10);
+
+        jMenuBar1.add(jMenuAbrirPasta);
+
         jMenu_Minimizar.setText("-");
         jMenu_Minimizar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenu_Minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,7 +303,7 @@ public class telaHome extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1360, 745));
+        setSize(new java.awt.Dimension(1366, 745));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -421,6 +456,22 @@ public class telaHome extends javax.swing.JFrame {
         frameMarca.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        try {
+            Runtime.getRuntime().exec("explorer C:\\javaEmp\\Tabela de Produtos");
+        } catch (IOException ex) {
+            Logger.getLogger(telaHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        try {
+            Runtime.getRuntime().exec("explorer C:\\javaEmp\\Pedidos");
+        } catch (IOException ex) {
+            Logger.getLogger(telaHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -465,15 +516,20 @@ public class telaHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAbrirPasta;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemGerenciarProdutos;
     private javax.swing.JMenuItem jMenuItem_CriarUsuario;

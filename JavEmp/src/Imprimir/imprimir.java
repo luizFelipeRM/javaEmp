@@ -19,7 +19,7 @@ import jxl.write.Label;
 public class imprimir {
 	public void excelTabela(JTable table) {
 		try {
-                      String filename = "C:\\javaEmp/Tabela_de_Produtos.xls";
+                      String filename = "C:\\javaEmp/Tabela de Produtos/Tabela_de_Produtos.xls";
 		      WorkbookSettings ws = new WorkbookSettings();
 		      ws.setLocale(new Locale("en", "EN"));
 		      WritableWorkbook workbook = Workbook.createWorkbook(new File(filename), ws);
@@ -44,7 +44,7 @@ public class imprimir {
                     Calendar calendar = new GregorianCalendar();
                     Date data = new Date(System.currentTimeMillis());  
                     //SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy"); 
-                    SimpleDateFormat formatarDate = new SimpleDateFormat("dd-MM-yyyy"); 
+                    SimpleDateFormat formatarDate = new SimpleDateFormat("dd-MM-yyyy_(HH-mm-ss)"); 
 
                     return formatarDate.format(data);  
                 }
