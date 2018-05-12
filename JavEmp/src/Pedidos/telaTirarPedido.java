@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -34,6 +35,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     ConnectMYSQL conex = new ConnectMYSQL();
     beansPedido mod = new beansPedido();
     daoPedidos dao = new daoPedidos();
+    beansParcela modParcela = new beansParcela();
+    daoParcelas daoParcela = new daoParcelas();
     beansEstatisticaPedidos beans = new beansEstatisticaPedidos();
     daoEstatisticaPesquisa daoEstatistica = new daoEstatisticaPesquisa();
     DefaultListModel MODELO;
@@ -52,6 +55,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     carrinhoTableModel tableModel = new carrinhoTableModel();
     
     public void atualizarTabela() {
+        jComboBoxParcela.setVisible(false);
              while (true) {
                 try {
                     
@@ -125,7 +129,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jButtonLimpar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldValorAtual = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -136,6 +139,9 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jTextFieldQuantidade = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxParcela = new javax.swing.JCheckBox();
+        jComboBoxParcela = new javax.swing.JComboBox<>();
+        jTextFieldValorAtual = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setTitle("Tirar Pedido");
@@ -276,19 +282,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Valor Atual");
         jLayeredPane1.add(jLabel5);
-        jLabel5.setBounds(1080, 0, 130, 24);
-
-        jTextFieldValorAtual.setEditable(false);
-        jTextFieldValorAtual.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldValorAtual.setText("0.0");
-        jTextFieldValorAtual.setEnabled(false);
-        jTextFieldValorAtual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldValorAtualActionPerformed(evt);
-            }
-        });
-        jLayeredPane1.add(jTextFieldValorAtual);
-        jTextFieldValorAtual.setBounds(1000, 20, 270, 30);
+        jLabel5.setBounds(1100, 0, 130, 24);
 
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("                                                 Finalizar Pedido");
@@ -331,7 +325,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelNomeCliente.setText("Nome do Cliente");
         jLayeredPane1.add(jLabelNomeCliente);
-        jLabelNomeCliente.setBounds(610, 30, 180, 20);
+        jLabelNomeCliente.setBounds(530, 30, 150, 20);
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setText("Adicionar ao Carrinho");
@@ -396,6 +390,33 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         });
         jLayeredPane1.add(jCheckBox1);
         jCheckBox1.setBounds(20, 90, 190, 28);
+
+        jCheckBoxParcela.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jCheckBoxParcela.setText("Parcelar");
+        jCheckBoxParcela.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxParcelaItemStateChanged(evt);
+            }
+        });
+        jCheckBoxParcela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxParcelaActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.add(jCheckBoxParcela);
+        jCheckBoxParcela.setBounds(20, 160, 100, 28);
+
+        jComboBoxParcela.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBoxParcela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        jLayeredPane1.add(jComboBoxParcela);
+        jComboBoxParcela.setBounds(130, 160, 80, 34);
+
+        jTextFieldValorAtual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jTextFieldValorAtual.setToolTipText("");
+        jTextFieldValorAtual.setEnabled(false);
+        jTextFieldValorAtual.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLayeredPane1.add(jTextFieldValorAtual);
+        jTextFieldValorAtual.setBounds(1030, 20, 240, 30);
 
         getContentPane().add(jLayeredPane1);
 
@@ -508,6 +529,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         Double valorTotal = 0.00;
          for(int i = 0; i < jTable_Carrinho.getRowCount(); i++){
            valorTotal  += Double.parseDouble(jTable_Carrinho.getValueAt(i, 2).toString());
+           valorTotal = Double.valueOf(String.format(Locale.US, "%.2f",valorTotal));
       }
          return valorTotal.toString();
     }
@@ -632,6 +654,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         public void preencherTabelaCarrinho(){
           beansCarrinho p = new beansCarrinho();
           
+            valorProduto = Double.valueOf(String.format(Locale.US, "%.2f", valorProduto));  // Reduzindo o double para duas casas
+            
             p.setId(idProduto);
             p.setDescricao(nomeProduto);
             p.setMarca(marcaProduto);
@@ -662,35 +686,81 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         int resposta = 0;
+        if(jComboBoxParcela.isVisible()){
+        double valor = Double.parseDouble(jTextFieldValorAtual.getText());
+        int parcelado = Integer.valueOf(String.format(Locale.US, "%.2f", valorProduto));   
+        double valorParcelado = valor/parcelado;
+        resposta = JOptionPane.showConfirmDialog(null, "Deseja Finalizar o pedido\nde "+parcelado+" vezes o valor R$:"+valorParcelado+" dando um total de R$:"+valor+"?");   
+        }else{
         resposta = JOptionPane.showConfirmDialog(null, "Deseja Finalizar o pedido\nde Valor R$:"+jTextFieldValorAtual.getText()+"?");
+        }
         if(resposta ==JOptionPane.YES_OPTION){
            
          double valorAtual = Double.parseDouble(CalculaTotal());
          
             if(valorAtual != 0.0 ){
-              if(jCheckBox1.isSelected()){
-                  Salvar();
+              if(jCheckBox1.isSelected()){ //Caso não tenha nenhum cliente escolhido
+                  Salvar();  // Salvando no compraFeita
+                  
                     DiminuirEstoque();              
                     voltarPadrao();
                     limparTabela();
               }else{
 
                 if(!jLabelNomeCliente.getText().equals("Nome do Cliente")){
+                    //Caso tenha um cliente escolhido
  
-                    
+                    Salvar(); // Salvando no compraFeita
                     DiminuirEstoque();
-                   //Salvando no BD de compra pra dps
+                    
+
+                  if(jComboBoxParcela.isVisible()){
+                   //Salvando no BD de entregar pedidos com parcela                      
+                    int parcelado = Integer.parseInt((String) jComboBoxParcela.getSelectedItem());
                     mod.setNomeClienteCompra(jLabelNomeCliente.getText());
                     mod.setValorCompra(valorAtual);                                        
                     mod.setQuantidadeCompra(CalcularQuantidadeTotal());
                     mod.setData(getDataAtual());
+                    mod.setParcela(parcelado);                    
                     dao.Salvar(mod);
-                                        
+                    
+                    
+                    
+                    //Passando como parametro para a tela de prestação
+                    int parceladoBD = Integer.parseInt((String) jComboBoxParcela.getSelectedItem());
+
+                    double preçoPorParcela = valorAtual/parcelado;
+                    dataDasParcelas data = new dataDasParcelas(parcelado, jLabelNomeCliente.getText(), valorAtual);
+                    data.setVisible(true);
+                    
+                  }else{
+                    
+                   //Salvando no BD de entregar pedidos com 1 parcela                            
+                    mod.setNomeClienteCompra(jLabelNomeCliente.getText());
+                    mod.setValorCompra(valorAtual);                                        
+                    mod.setQuantidadeCompra(CalcularQuantidadeTotal());
+                    mod.setParcela(1); 
+                    mod.setData(getDataAtual());
+                    
+                    dao.Salvar(mod);                      
+                  }                    
                    //Salvando nas estatisticas
                     Salvar();
                     
+                    
+                   /**
+                    * Passando para excel
+                    */
+                      
                     imprimir imprimir = new imprimir();
-                    imprimir.excelPedido(jTable_Carrinho, jLabelNomeCliente.getText());
+                   if(jComboBoxParcela.isVisible()){
+                    int parcelado = Integer.parseInt((String) jComboBoxParcela.getSelectedItem());
+                    String preçoPorParcela =Double.toString(valorAtual/parcelado);
+                    imprimir.excelPedido(jTable_Carrinho, jLabelNomeCliente.getText(), jTextFieldValorAtual.getText(),(String) jComboBoxParcela.getSelectedItem(), preçoPorParcela);
+                   }else{
+                    String preçoPorParcela = jTextFieldValorAtual.getText();                       
+                    imprimir.excelPedido(jTable_Carrinho, jLabelNomeCliente.getText(), jTextFieldValorAtual.getText(),(String) jComboBoxParcela.getSelectedItem(), preçoPorParcela);                    
+                   }
                                 
                    JOptionPane.showMessageDialog(null, "Pedido concluido e enviado à tela de entregas");
                     
@@ -773,7 +843,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 tableModel.setQuantidade(jTable_Carrinho.getSelectedRow(), quantidade);
          
                 //valorProduto = valorProduto * quantidadeProduto;
-                jTextFieldValorAtual.setText(Decimalizar(CalculaTotal()));
+                jTextFieldValorAtual.setText(CalculaTotal());
                 jTable_Carrinho.clearSelection();
                 jTableProdutos.clearSelection();
 
@@ -802,7 +872,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 tableModel.removeRow(jTable_Carrinho.getSelectedRow());
                 jTable_Carrinho.clearSelection();
                 jTableProdutos.clearSelection();
-                jTextFieldValorAtual.setText((Decimalizar(CalculaTotal())));            
+                jTextFieldValorAtual.setText(CalculaTotal());            
             }
         }else{
             JOptionPane.showMessageDialog(null, "Escolha o item que deseja remover da compra");
@@ -896,12 +966,13 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
                 valorProduto = valorProduto * quantidadeProduto;
                 if(quantidadeProduto <= estoque){
                 preencherTabelaCarrinho();
+               
                     }else{
                         JOptionPane.showMessageDialog(null, "Estoque menor do que a quantidade");
                     }
                 
             }
-            jTextFieldValorAtual.setText((Decimalizar(CalculaTotal())));
+            jTextFieldValorAtual.setText(CalculaTotal());
             jTableProdutos.clearSelection();
             jTable_Carrinho.clearSelection();
             jTextFieldQuantidade.setText("Única");
@@ -973,10 +1044,6 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jTextFieldValorAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorAtualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldValorAtualActionPerformed
-
     private void jComboBoxTipodoProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipodoProdutoItemStateChanged
         // TODO add your handling code here:
                     modProdutos.setPesquisa(jTextFieldPesquisarProduto.getText());
@@ -1001,6 +1068,19 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jComboBoxTipodoProdutoItemStateChanged
 
+    private void jCheckBoxParcelaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxParcelaItemStateChanged
+
+    }//GEN-LAST:event_jCheckBoxParcelaItemStateChanged
+
+    private void jCheckBoxParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxParcelaActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBoxParcela.isSelected()){
+             jComboBoxParcela.setVisible(true);
+        }else{
+             jComboBoxParcela.setVisible(false);
+        }        
+    }//GEN-LAST:event_jCheckBoxParcelaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
@@ -1008,6 +1088,8 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxParcela;
+    private javax.swing.JComboBox<String> jComboBoxParcela;
     private javax.swing.JComboBox<String> jComboBoxTipodoProduto;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
     private javax.swing.JLabel jLabel1;
@@ -1028,7 +1110,7 @@ public class telaTirarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesquisarProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
-    private javax.swing.JTextField jTextFieldValorAtual;
+    private javax.swing.JFormattedTextField jTextFieldValorAtual;
     // End of variables declaration//GEN-END:variables
 }
 

@@ -14,7 +14,7 @@ import Marca.frameMarca;
 import Pedidos.telaTirarPedido;
 import Produtos.telaEstoque;
 import Produtos.telaGenrenciarProdutos;
-import Pedidos.telaFecharPedido;
+import Pedidos.fecharPedido.telaFecharPedido;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.beans.PropertyVetoException;
@@ -263,7 +263,7 @@ public class telaHome extends javax.swing.JFrame {
         jMenuAbrirPasta.add(jMenuItem8);
 
         jMenuItem10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem10.setText("Pedido");
+        jMenuItem10.setText("Pedidos");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);

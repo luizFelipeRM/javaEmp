@@ -24,6 +24,7 @@ public class beansPedido {
     private String pesquisa;
     private String tipoPesquisa;
     private String marca;
+    private int parcela;
 
     /**
      * @return the valorCompra
@@ -226,6 +227,20 @@ public class beansPedido {
      */
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    /**
+     * @return the parcela
+     */
+    public int getParcela() {
+        return parcela;
+    }
+
+    /**
+     * @param parcela the parcela to set
+     */
+    public void setParcela(int parcela) {
+        this.parcela = parcela;
     }
     
     

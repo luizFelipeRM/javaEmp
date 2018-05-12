@@ -82,7 +82,6 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jTextField = new javax.swing.JTextField();
         jTextFieldNomedoProduto = new javax.swing.JTextField();
         jTextFieldQuantidade = new javax.swing.JTextField();
-        jTextFieldPreço = new javax.swing.JTextField();
         jLabelTipo = new javax.swing.JLabel();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jButtonEnviar = new javax.swing.JButton();
@@ -96,6 +95,8 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBoxMarca = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldPreço = new javax.swing.JTextField();
 
         setClosable(true);
         getContentPane().setLayout(null);
@@ -138,28 +139,6 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jTextFieldQuantidade);
         jTextFieldQuantidade.setBounds(1060, 60, 280, 40);
-
-        jTextFieldPreço.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldPreço.setText("R$ 00,00");
-        jTextFieldPreço.setToolTipText("Valor");
-        jTextFieldPreço.setEnabled(false);
-        jTextFieldPreço.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldPreçoMouseClicked(evt);
-            }
-        });
-        jTextFieldPreço.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPreçoActionPerformed(evt);
-            }
-        });
-        jTextFieldPreço.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldPreçoKeyPressed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldPreço);
-        jTextFieldPreço.setBounds(760, 60, 290, 40);
 
         jLabelTipo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelTipo.setText("Tipo:");
@@ -291,6 +270,27 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(0, 590, 1330, 50);
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("Preço:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(760, 70, 60, 24);
+
+        jTextFieldPreço.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldPreço.setText("R$: 0.00");
+        jTextFieldPreço.setEnabled(false);
+        jTextFieldPreço.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldPreçoMouseClicked(evt);
+            }
+        });
+        jTextFieldPreço.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldPreçoKeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldPreço);
+        jTextFieldPreço.setBounds(820, 60, 240, 40);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,7 +316,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
     
     public void BloquearEscrever(){
         jTextFieldNomedoProduto.setText("Nome do Produto");
-        jTextFieldPreço.setText("R$ 00,00");
+        jTextFieldPreço.setText("");
         jTextFieldQuantidade.setText("Quantidade");
         
         jTextFieldNomedoProduto.setEnabled(false);
@@ -336,7 +336,7 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         flag = 1;
         Liberar();
         jTextFieldNomedoProduto.setText("Nome do Produto");
-        jTextFieldPreço.setText("R$ 00,00");
+        jTextFieldPreço.setText("R$: 0.00");
         jTextFieldQuantidade.setText("Quantidade");
         
         jButtonDeletar.setEnabled(false);
@@ -469,20 +469,6 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         conex.desconecta();
     }//GEN-LAST:event_jTableProdutosMouseClicked
 
-    private void jTextFieldPreçoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPreçoMouseClicked
-        // TODO add your handling code here:
-        if(jTextFieldPreço.getText().equals("R$ 00,00")){
-            jTextFieldPreço.setText("");
-        }
-    }//GEN-LAST:event_jTextFieldPreçoMouseClicked
-
-    private void jTextFieldPreçoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPreçoKeyPressed
-        // TODO add your handling code here:
-         if(jTextFieldPreço.getText().equals("R$ 00,00")){
-            jTextFieldPreço.setText("");
-        }
-    }//GEN-LAST:event_jTextFieldPreçoKeyPressed
-
     private void jTextFieldQuantidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeMouseClicked
         // TODO add your handling code here:
         if(jTextFieldQuantidade.getText().equals("Quantidade")){
@@ -553,10 +539,6 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jComboBoxTipodoProdutoItemStateChanged
 
-    private void jTextFieldPreçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPreçoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPreçoActionPerformed
-
     private void jComboBoxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxMarcaActionPerformed
@@ -571,6 +553,19 @@ public class telaGenrenciarProdutos extends javax.swing.JInternalFrame {
         imprimir imprimir = new imprimir();
         imprimir.excelTabela(jTableProdutos);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldPreçoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPreçoMouseClicked
+        if(jTextFieldPreço.getText().equals("R$: 0.00")){
+            jTextFieldPreço.setText("");    
+        }
+    }//GEN-LAST:event_jTextFieldPreçoMouseClicked
+
+    private void jTextFieldPreçoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPreçoKeyPressed
+        // TODO add your handling code here:
+         if(jTextFieldPreço.getText().equals("R$: 0.00")){
+            jTextFieldPreço.setText("");
+        }       
+    }//GEN-LAST:event_jTextFieldPreçoKeyPressed
 
 public void preencherTabela(String Sql){
           ArrayList dados = new ArrayList();
@@ -615,6 +610,7 @@ public void preencherTabela(String Sql){
     private javax.swing.JComboBox<String> jComboBoxTipodoProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProdutos;

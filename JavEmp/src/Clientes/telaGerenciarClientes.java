@@ -231,6 +231,11 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
                 jTextFieldRuaMouseClicked(evt);
             }
         });
+        jTextFieldRua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRuaActionPerformed(evt);
+            }
+        });
         jTextFieldRua.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldRuaKeyPressed(evt);
@@ -253,6 +258,11 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         jTextFieldComplemento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldComplementoMouseClicked(evt);
+            }
+        });
+        jTextFieldComplemento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldComplementoKeyPressed(evt);
             }
         });
         getContentPane().add(jTextFieldComplemento);
@@ -304,7 +314,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
             jTextFieldComplemento.setText(conex.rs.getString("complemento"));
             jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
             
-             if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   /    -  ") ){
+             if(jFormattedTextFieldCPFCNPJ.getText().equals("  .   .   /    -  ") ){
             jComboBox1.setSelectedItem("CPF");
             jFormattedTextFieldCPFCNPJ.setText(conex.rs.getString("cpfcnpj"));
         }
@@ -318,7 +328,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar os dados "+ex);
         }
         
-        if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   /    -  ") ){
+        if(jFormattedTextFieldCPFCNPJ.getText().equals("  .   .   /    -  ") ){
             jComboBox1.setSelectedItem("CNPJ");
         }
         if(jFormattedTextFieldCPFCNPJ.getText().equals("   .   .   -  ") && jComboBox1.getSelectedItem().equals("CPF")){
@@ -356,7 +366,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedItem("CPF");
         jFormattedTextFieldCPFCNPJ.setText("");
         jComboBoxBairros.setSelectedItem("Abolição");
-        jTextFieldComplemento.setText("Numeros e Complementos");
+        jTextFieldComplemento.setText("Numero e Complemento");
         
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
@@ -401,7 +411,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
             MaskFormatter format;
              try {
                 jFormattedTextFieldCPFCNPJ.setFormatterFactory(null); 
-                format = new MaskFormatter("###.###.###/####-##");
+                format = new MaskFormatter("##.###.###/####-##");
                 jFormattedTextFieldCPFCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(format));  
                 jFormattedTextFieldCPFCNPJ.setValue(null);
             } catch (ParseException ex) {
@@ -420,31 +430,41 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
 
     private void jTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyPressed
         // TODO add your handling code here:
-                if(jTextFieldNome.getText().equals("Nome do Cliente")){
+         if(jTextFieldNome.getText().equals("Nome do Cliente")){
             jTextFieldNome.setText("");
         }
     }//GEN-LAST:event_jTextFieldNomeKeyPressed
 
     private void jTextFieldRuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldRuaMouseClicked
         // TODO add your handling code here
-                        if(jTextFieldNome.getText().equals("Rua do Cliente")){
-            jTextFieldNome.setText("");
+         if(jTextFieldRua.getText().equals("Rua do Cliente")){
+            jTextFieldRua.setText("");
         }
     }//GEN-LAST:event_jTextFieldRuaMouseClicked
 
     private void jTextFieldRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldRuaKeyPressed
         // TODO add your handling code here:
-                        if(jTextFieldNome.getText().equals("Rua do Cliente")){
-            jTextFieldNome.setText("");
+         if(jTextFieldRua.getText().equals("Rua do Cliente")){
+            jTextFieldRua.setText("");
         }
     }//GEN-LAST:event_jTextFieldRuaKeyPressed
 
     private void jTextFieldComplementoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldComplementoMouseClicked
         // TODO add your handling code here:
-             if(jTextFieldNome.getText().equals("Numero e Complemento")){
-            jTextFieldNome.setText("");
+        if(jTextFieldComplemento.getText().equals("Numero e Complemento")){
+            jTextFieldComplemento.setText("");
         }
     }//GEN-LAST:event_jTextFieldComplementoMouseClicked
+
+    private void jTextFieldComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldComplementoKeyPressed
+        if(jTextFieldComplemento.getText().equals("Numero e Complemento")){
+            jTextFieldComplemento.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldComplementoKeyPressed
+
+    private void jTextFieldRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRuaActionPerformed
     public void limpareLiberar(){
         
         
@@ -465,7 +485,7 @@ public class telaGerenciarClientes extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedItem("CPF");
         jFormattedTextFieldCPFCNPJ.setText("");
         jComboBoxBairros.setSelectedItem("Abolição");
-        jTextFieldComplemento.setText("Numeros e Complementos");
+        jTextFieldComplemento.setText("Numero e Complemento");
         
         jTextFieldNome.setEnabled(false);
         jTextFieldRua.setEnabled(false);

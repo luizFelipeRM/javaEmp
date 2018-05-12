@@ -22,11 +22,12 @@ public class daoPedidos {
     public void Salvar(beansPedido mod) {
         conex.conectar();
         try {
-            PreparedStatement pst = conex.con.prepareStatement("insert into compra(nome,valor,quantidade,data) values(?,?,?,?)");
+            PreparedStatement pst = conex.con.prepareStatement("insert into compra(nome,valor,quantidade,data,parcela) values(?,?,?,?,?)");
             pst.setString(1, mod.getNomeClienteCompra());
             pst.setDouble(2, mod.getValorCompral());
             pst.setInt   (3, mod.getQuantidadeCompra());
             pst.setString(4, mod.getData());
+            pst.setInt   (5, mod.getParcela());
        
             pst.execute();
         } catch (SQLException ex) {
